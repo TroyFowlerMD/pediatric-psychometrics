@@ -696,10 +696,11 @@ a, button, [role='button'], input, select {
   margin-top: var(--space-3);
   flex-wrap: nowrap;
 }
-/* Expand radio-group to fill card width — break out of number badge indent */
+/* Expand radio-group to fill card width — break out of number badge indent + reduce side margin */
 .question-section .radio-group {
-  margin-left: calc(-28px - var(--space-4));
-  width: calc(100% + 28px + var(--space-4));
+  margin-left: calc(-28px - var(--space-4) - 1rem);
+  margin-right: -1rem;
+  width: calc(100% + 28px + var(--space-4) + 2rem);
 }
 
 .radio-option {
@@ -1299,7 +1300,7 @@ a, button, [role='button'], input, select {
         <a href="index.html" data-es="Herramientas Pediátricas" data-en="Pediatric Tools" style="color:var(--color-primary);text-decoration:none;font-size:var(--text-sm);font-weight:500;">← Pediatric Tools</a>
         <div>
           <div class="topbar-title">CAP Scale</div>
-          <div class="topbar-subtitle" data-es="Perfil de Atención Infantil (6–13 años)" data-en="Child Attention Profile (6–13 years)">Perfil de Atención Infantil (6–13 años)</div>
+          <div class="topbar-subtitle" data-es="Perfil de Atención Infantil (6–13 años)" data-en="Child Attention Profile (6–13 years)">Child Attention Profile (6–13 years)</div>
         </div>
       </div>
       <div class="topbar-actions">
@@ -1318,32 +1319,32 @@ a, button, [role='button'], input, select {
 
       <!-- Medical Disclaimer -->
       <div class="disclaimer-banner">
-        <strong data-es="Aviso Médico:" data-en="Medical Disclaimer:">Aviso Médico:</strong>
-        <span data-es=" Esta herramienta es solo para uso clínico de apoyo. No reemplaza el juicio clínico, el diagnóstico médico ni la evaluación profesional. Los resultados deben interpretarse en el contexto clínico completo del paciente." data-en=" This tool is for clinical support use only. It does not replace clinical judgment, medical diagnosis, or professional evaluation. Results must be interpreted within the full clinical context of the patient."> Esta herramienta es solo para uso clínico de apoyo. No reemplaza el juicio clínico, el diagnóstico médico ni la evaluación profesional. Los resultados deben interpretarse en el contexto clínico completo del paciente.</span>
+        <strong data-es="Aviso Médico:" data-en="Medical Disclaimer:">Medical Disclaimer:</strong>
+        <span data-es=" Esta herramienta es solo para uso clínico de apoyo. No reemplaza el juicio clínico, el diagnóstico médico ni la evaluación profesional. Los resultados deben interpretarse en el contexto clínico completo del paciente." data-en=" This tool is for clinical support use only. It does not replace clinical judgment, medical diagnosis, or professional evaluation. Results must be interpreted within the full clinical context of the patient."> This tool is for clinical support use only. It does not replace clinical judgment, medical diagnosis, or professional evaluation. Results must be interpreted within the full clinical context of the patient.</span>
       </div>
 
       <!-- Tool Header -->
       <div class="tool-header-card">
         <h1>CAP Scale</h1>
-        <p data-es="Perfil de Atención Infantil — Edelbrock &amp; Barkley" data-en="Child Attention Profile — Edelbrock &amp; Barkley">Perfil de Atención Infantil — Edelbrock &amp; Barkley</p>
+        <p data-es="Perfil de Atención Infantil — Edelbrock &amp; Barkley" data-en="Child Attention Profile — Edelbrock &amp; Barkley">Child Attention Profile — Edelbrock &amp; Barkley</p>
         <div class="tool-header-meta">
-          <span data-es="12 ítems" data-en="12 items">12 ítems</span>
-          <span data-es="Edades 6–13 años" data-en="Ages 6–13 years">Edades 6–13 años</span>
-          <span data-es="Calificado por maestro/a" data-en="Teacher-rated">Calificado por maestro/a</span>
-          <span data-es="Última semana" data-en="Past week">Última semana</span>
+          <span data-es="12 ítems" data-en="12 items">12 items</span>
+          <span data-es="Edades 6–13 años" data-en="Ages 6–13 years">Ages 6–13 years</span>
+          <span data-es="Calificado por maestro/a" data-en="Teacher-rated">Teacher-rated</span>
+          <span data-es="Última semana" data-en="Past week">Past week</span>
         </div>
       </div>
 
       <!-- Instructions -->
       <div class="instructions-box">
-        <h3 data-es="Instrucciones" data-en="Instructions">Instrucciones</h3>
-        <p data-es="Para cada comportamiento, indique qué tan bien describe al niño/a durante la última semana. Seleccione 0 = No es cierto, 1 = Algo o a veces cierto, o 2 = Muy cierto o frecuente. Todos los ítems son requeridos." data-en="For each behavior, indicate how well it describes the child during the past week. Select 0 = Not True, 1 = Somewhat or Sometimes True, or 2 = Very or Often True. All items are required.">Para cada comportamiento, indique qué tan bien describe al niño/a durante la última semana. Seleccione 0 = No es cierto, 1 = Algo o a veces cierto, o 2 = Muy cierto o frecuente. Todos los ítems son requeridos.</p>
+        <h3 data-es="Instrucciones" data-en="Instructions">Instructions</h3>
+        <p data-es="Para cada comportamiento, indique qué tan bien describe al niño/a durante la última semana. Seleccione 0 = No es cierto, 1 = Algo o a veces cierto, o 2 = Muy cierto o frecuente. Todos los ítems son requeridos." data-en="For each behavior, indicate how well it describes the child during the past week. Select 0 = Not True, 1 = Somewhat or Sometimes True, or 2 = Very or Often True. All items are required.">For each behavior, indicate how well it describes the child during the past week. Select 0 = Not True, 1 = Somewhat or Sometimes True, or 2 = Very or Often True. All items are required.</p>
       </div>
 
       <!-- Subscale legend -->
       <div class="subscale-legend">
-        <div class="legend-item"><div class="legend-dot IN"></div><span data-es="IN = Inatención" data-en="IN = Inattention">IN = Inatención</span></div>
-        <div class="legend-item"><div class="legend-dot OV"></div><span data-es="OV = Sobreactividad" data-en="OV = Overactivity">OV = Sobreactividad</span></div>
+        <div class="legend-item"><div class="legend-dot IN"></div><span data-es="IN = Inatención" data-en="IN = Inattention">IN = Inattention</span></div>
+        <div class="legend-item"><div class="legend-dot OV"></div><span data-es="OV = Sobreactividad" data-en="OV = Overactivity">OV = Overactivity</span></div>
       </div>
 
       <!-- Questions -->
@@ -1351,7 +1352,7 @@ a, button, [role='button'], input, select {
 
       <!-- Score Panel (BOTTOM — not sticky) -->
       <div class="score-panel" id="scorePanel">
-        <div class="score-panel-title" data-es="Resultado" data-en="Result">Resultado</div>
+        <div class="score-panel-title" data-es="Resultado" data-en="Result">Result</div>
 
         <div class="score-display">
           <div class="score-total" id="totalScore">0</div>
@@ -1365,25 +1366,25 @@ a, button, [role='button'], input, select {
         <!-- Subscale breakdown -->
         <div class="subscale-grid" style="grid-template-columns: repeat(3,1fr);">
           <div class="subscale-item" id="subIN">
-            <div class="subscale-label" data-es="Inatención (IN)" data-en="Inattention (IN)">Inatención (IN)</div>
+            <div class="subscale-label" data-es="Inatención (IN)" data-en="Inattention (IN)">Inattention (IN)</div>
             <div class="subscale-score"><span id="score_subIN">0</span><span style="font-size:var(--text-sm);color:var(--color-text-muted)">/14</span></div>
-            <div class="subscale-cutoff" data-es="Ítems 1,2,5,7,9,10,12" data-en="Items 1,2,5,7,9,10,12">Ítems 1,2,5,7,9,10,12</div>
+            <div class="subscale-cutoff" data-es="Ítems 1,2,5,7,9,10,12" data-en="Items 1,2,5,7,9,10,12">Items 1,2,5,7,9,10,12</div>
           </div>
           <div class="subscale-item" id="subOV">
-            <div class="subscale-label" data-es="Sobreactividad (OV)" data-en="Overactivity (OV)">Sobreactividad (OV)</div>
+            <div class="subscale-label" data-es="Sobreactividad (OV)" data-en="Overactivity (OV)">Overactivity (OV)</div>
             <div class="subscale-score"><span id="score_subOV">0</span><span style="font-size:var(--text-sm);color:var(--color-text-muted)">/10</span></div>
-            <div class="subscale-cutoff" data-es="Ítems 3,4,6,8,11" data-en="Items 3,4,6,8,11">Ítems 3,4,6,8,11</div>
+            <div class="subscale-cutoff" data-es="Ítems 3,4,6,8,11" data-en="Items 3,4,6,8,11">Items 3,4,6,8,11</div>
           </div>
           <div class="subscale-item" id="subTOT">
             <div class="subscale-label" data-es="Total" data-en="Total">Total</div>
             <div class="subscale-score"><span id="score_subTOT">0</span><span style="font-size:var(--text-sm);color:var(--color-text-muted)">/24</span></div>
-            <div class="subscale-cutoff" data-es="Todos los ítems" data-en="All items">Todos los ítems</div>
+            <div class="subscale-cutoff" data-es="Todos los ítems" data-en="All items">All items</div>
           </div>
         </div>
 
         <!-- Normative reference -->
         <div style="background:var(--color-surface-offset);border-radius:var(--radius-lg);padding:var(--space-4);margin-bottom:var(--space-4);font-size:var(--text-xs);">
-          <div style="font-weight:700;margin-bottom:var(--space-2);color:var(--color-text);" data-es="Valores normativos (Barkley &amp; Edelbrock)" data-en="Normative values (Barkley &amp; Edelbrock)">Valores normativos (Barkley &amp; Edelbrock)</div>
+          <div style="font-weight:700;margin-bottom:var(--space-2);color:var(--color-text);" data-es="Valores normativos (Barkley &amp; Edelbrock)" data-en="Normative values (Barkley &amp; Edelbrock)">Normative values (Barkley &amp; Edelbrock)</div>
           <table style="width:100%;border-collapse:collapse;font-size:var(--text-xs);">
             <thead><tr style="color:var(--color-text-muted);">
               <th style="text-align:left;padding:2px 4px;" data-es="Percentil" data-en="Percentile">Percentil</th>
@@ -1397,7 +1398,7 @@ a, button, [role='button'], input, select {
               <tr><td style="padding:2px 4px;" data-es="98°" data-en="98th">98°</td><td style="text-align:center;padding:2px 4px;">11/12/10</td><td style="text-align:center;padding:2px 4px;">8/8/7</td><td style="text-align:center;padding:2px 4px;">19/20/16</td></tr>
             </tbody>
           </table>
-          <div style="margin-top:var(--space-2);color:var(--color-text-muted);" data-es="T=Todos, M=Masculino, F=Femenino. ≥84° percentil = preocupación clínicamente significativa." data-en="A=All, B=Boys, G=Girls. ≥84th percentile = clinically significant concern.">T=Todos, M=Masculino, F=Femenino. ≥84° percentil = preocupación clínicamente significativa.</div>
+          <div style="margin-top:var(--space-2);color:var(--color-text-muted);" data-es="T=Todos, M=Masculino, F=Femenino. ≥84° percentil = preocupación clínicamente significativa." data-en="A=All, B=Boys, G=Girls. ≥84th percentile = clinically significant concern.">A=All, B=Boys, G=Girls. ≥84th percentile = clinically significant concern.</div>
         </div>
 
         <!-- Note summary -->
@@ -1436,19 +1437,19 @@ a, button, [role='button'], input, select {
         <!-- Actions -->
         <div class="score-actions" style="margin-top:var(--space-4);">
           <button type="button" class="btn-secondary" onclick="copyNote()">
-            <span id="copyBtnLabel" data-es="Copiar resumen" data-en="Copy summary">Copiar resumen</span>
+            <span id="copyBtnLabel" data-es="Copiar resumen" data-en="Copy summary">Copy summary</span>
           </button>
           <span class="copy-feedback" id="copyFeedback"></span>
           <button type="button" class="btn-secondary" onclick="resetForm()">
-            <span data-es="Reiniciar" data-en="Reset">Reiniciar</span>
+            <span data-es="Reiniciar" data-en="Reset">Reset</span>
           </button>
         </div>
       </div>
 
       <!-- Copyright footer -->
       <div class="copyright-footer">
-    <strong data-es="Derechos de autor:" data-en="Copyright:">Derechos de autor:</strong>
-    <span data-es=" CAP Scale — Child Attention Profile. Datos normativos de Russell A. Barkley y Craig Edelbrock. Diseño del formulario © 1999 Henry L. Shapiro, M.D. Reproducido con fines clínicos y educativos sin fines de lucro. No para distribución masiva ni uso comercial." data-en=" CAP Scale — Child Attention Profile. Normative data from Russell A. Barkley and Craig Edelbrock. Form design © 1999 Henry L. Shapiro, M.D. Reproduced for non-profit clinical and educational use. Not for mass distribution or commercial use."> CAP Scale — Child Attention Profile. Datos normativos de Russell A. Barkley y Craig Edelbrock. Diseño del formulario © 1999 Henry L. Shapiro, M.D. Reproducido con fines clínicos y educativos sin fines de lucro. No para distribución masiva ni uso comercial.</span>
+    <strong data-es="Derechos de autor:" data-en="Copyright:">Copyright:</strong>
+    <span data-es=" CAP Scale — Child Attention Profile. Datos normativos de Russell A. Barkley y Craig Edelbrock. Diseño del formulario © 1999 Henry L. Shapiro, M.D. Reproducido con fines clínicos y educativos sin fines de lucro. No para distribución masiva ni uso comercial." data-en=" CAP Scale — Child Attention Profile. Normative data from Russell A. Barkley and Craig Edelbrock. Form design © 1999 Henry L. Shapiro, M.D. Reproduced for non-profit clinical and educational use. Not for mass distribution or commercial use."> CAP Scale — Child Attention Profile. Normative data from Russell A. Barkley and Craig Edelbrock. Form design © 1999 Henry L. Shapiro, M.D. Reproduced for non-profit clinical and educational use. Not for mass distribution or commercial use.</span>
   </div>
 
     </div><!-- /page-content -->

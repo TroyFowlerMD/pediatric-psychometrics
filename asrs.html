@@ -696,10 +696,11 @@ a, button, [role='button'], input, select {
   margin-top: var(--space-3);
   flex-wrap: nowrap;
 }
-/* Expand radio-group to fill card width — break out of number badge indent */
+/* Expand radio-group to fill card width — break out of number badge indent + reduce side margin */
 .question-section .radio-group {
-  margin-left: calc(-28px - var(--space-4));
-  width: calc(100% + 28px + var(--space-4));
+  margin-left: calc(-28px - var(--space-4) - 1rem);
+  margin-right: -1rem;
+  width: calc(100% + 28px + var(--space-4) + 2rem);
 }
 
 .radio-option {
@@ -1274,7 +1275,7 @@ a, button, [role='button'], input, select {
         <a href="index.html" data-es="Herramientas Pediátricas" data-en="Pediatric Tools" style="color:var(--color-primary);text-decoration:none;font-size:var(--text-sm);font-weight:500;">← Pediatric Tools</a>
         <div>
           <div class="topbar-title">ASRS-5</div>
-          <div class="topbar-subtitle" data-es="Escala de Autorreporte de TDAH del Adulto — DSM-5 (≥18 años)" data-en="Adult ADHD Self-Report Scale for DSM-5 (≥18 years)">Escala de Autorreporte de TDAH del Adulto — DSM-5 (≥18 años)</div>
+          <div class="topbar-subtitle" data-es="Escala de Autorreporte de TDAH del Adulto — DSM-5 (≥18 años)" data-en="Adult ADHD Self-Report Scale for DSM-5 (≥18 years)">Adult ADHD Self-Report Scale for DSM-5 (≥18 years)</div>
         </div>
       </div>
       <div class="topbar-actions">
@@ -1291,47 +1292,47 @@ a, button, [role='button'], input, select {
     <div class="page-content" style="max-width:800px;margin:0 auto;">
 
       <div class="disclaimer-banner">
-        <strong data-es="Aviso Médico:" data-en="Medical Disclaimer:">Aviso Médico:</strong>
-        <span data-es=" Esta herramienta es solo para uso clínico de apoyo. No reemplaza el juicio clínico, el diagnóstico médico ni la evaluación profesional." data-en=" This tool is for clinical support use only. It does not replace clinical judgment, medical diagnosis, or professional evaluation."> Esta herramienta es solo para uso clínico de apoyo. No reemplaza el juicio clínico, el diagnóstico médico ni la evaluación profesional.</span>
+        <strong data-es="Aviso Médico:" data-en="Medical Disclaimer:">Medical Disclaimer:</strong>
+        <span data-es=" Esta herramienta es solo para uso clínico de apoyo. No reemplaza el juicio clínico, el diagnóstico médico ni la evaluación profesional." data-en=" This tool is for clinical support use only. It does not replace clinical judgment, medical diagnosis, or professional evaluation."> This tool is for clinical support use only. It does not replace clinical judgment, medical diagnosis, or professional evaluation.</span>
       </div>
 
       <div class="tool-header-card">
         <h1>ASRS-5</h1>
-        <p data-es="Escala de Autorreporte de TDAH del Adulto para DSM-5 — OMS / Harvard Medical School" data-en="Adult ADHD Self-Report Scale for DSM-5 — WHO / Harvard Medical School">Escala de Autorreporte de TDAH del Adulto para DSM-5 — OMS / Harvard Medical School</p>
+        <p data-es="Escala de Autorreporte de TDAH del Adulto para DSM-5 — OMS / Harvard Medical School" data-en="Adult ADHD Self-Report Scale for DSM-5 — WHO / Harvard Medical School">Adult ADHD Self-Report Scale for DSM-5 — WHO / Harvard Medical School</p>
         <div class="tool-header-meta">
-          <span data-es="6 ítems" data-en="6 items">6 ítems</span>
-          <span data-es="Adultos ≥18 años" data-en="Adults ≥18 years">Adultos ≥18 años</span>
-          <span data-es="Autoinforme" data-en="Self-report">Autoinforme</span>
-          <span data-es="Corte ≥14" data-en="Cutoff ≥14">Corte ≥14</span>
+          <span data-es="6 ítems" data-en="6 items">6 items</span>
+          <span data-es="Adultos ≥18 años" data-en="Adults ≥18 years">Adults ≥18 years</span>
+          <span data-es="Autoinforme" data-en="Self-report">Self-report</span>
+          <span data-es="Corte ≥14" data-en="Cutoff ≥14">Cutoff ≥14</span>
         </div>
       </div>
 
       <div class="instructions-box">
-        <h3 data-es="Instrucciones" data-en="Instructions">Instrucciones</h3>
-        <p data-es="Para cada pregunta, seleccione con qué frecuencia ha tenido este problema durante los últimos 6 meses. Escala: 0 = Nunca, 1 = Raramente, 2 = A veces, 3 = A menudo, 4 = Muy frecuente." data-en="For each question, select how often you have experienced this problem over the past 6 months. Scale: 0 = Never, 1 = Rarely, 2 = Sometimes, 3 = Often, 4 = Very Often.">Para cada pregunta, seleccione con qué frecuencia ha tenido este problema durante los últimos 6 meses. Escala: 0 = Nunca, 1 = Raramente, 2 = A veces, 3 = A menudo, 4 = Muy frecuente.</p>
+        <h3 data-es="Instrucciones" data-en="Instructions">Instructions</h3>
+        <p data-es="Para cada pregunta, seleccione con qué frecuencia ha tenido este problema durante los últimos 6 meses. Escala: 0 = Nunca, 1 = Raramente, 2 = A veces, 3 = A menudo, 4 = Muy frecuente." data-en="For each question, select how often you have experienced this problem over the past 6 months. Scale: 0 = Never, 1 = Rarely, 2 = Sometimes, 3 = Often, 4 = Very Often.">For each question, select how often you have experienced this problem over the past 6 months. Scale: 0 = Never, 1 = Rarely, 2 = Sometimes, 3 = Often, 4 = Very Often.</p>
       </div>
 
       <div id="questions-container"></div>
 
       <!-- Score Panel -->
       <div class="score-panel" id="scorePanel">
-        <div class="score-panel-title" data-es="Resultado" data-en="Result">Resultado</div>
+        <div class="score-panel-title" data-es="Resultado" data-en="Result">Result</div>
         <div class="score-display">
           <div class="score-total" id="totalScore">0</div>
-          <div class="score-max" data-es="/ 24 puntos" data-en="/ 24 points">/ 24 puntos</div>
+          <div class="score-max" data-es="/ 24 puntos" data-en="/ 24 points">/ 24 points</div>
         </div>
         <div class="score-result-badge incomplete" id="resultBadge">
-          <span id="resultText" data-es="0/6 respondidas" data-en="0/6 answered">0/6 respondidas</span>
+          <span id="resultText" data-es="0/6 respondidas" data-en="0/6 answered">0/6 answered</span>
         </div>
 
         <div style="background:var(--color-surface-offset);border-radius:var(--radius-lg);padding:var(--space-4);margin-bottom:var(--space-4);font-size:var(--text-xs);">
-          <div style="font-weight:700;margin-bottom:var(--space-2);" data-es="Interpretación (Ustun et al., 2017)" data-en="Interpretation (Ustun et al., 2017)">Interpretación (Ustun et al., 2017)</div>
+          <div style="font-weight:700;margin-bottom:var(--space-2);" data-es="Interpretación (Ustun et al., 2017)" data-en="Interpretation (Ustun et al., 2017)">Interpretation (Ustun et al., 2017)</div>
           <table style="width:100%;border-collapse:collapse;">
             <tr><td style="padding:2px 6px;" data-es="Puntaje" data-en="Score">Puntaje</td><td style="padding:2px 6px;" data-es="Interpretación" data-en="Interpretation">Interpretación</td></tr>
             <tr style="color:var(--color-success);"><td>0–13</td><td data-es="No consistente con TDAH" data-en="Not consistent with ADHD">No consistente con TDAH</td></tr>
             <tr style="color:var(--color-warning);font-weight:700;"><td>≥14</td><td data-es="Consistente con TDAH — evaluación adicional indicada" data-en="Consistent with ADHD — further evaluation indicated">Consistente con TDAH — evaluación adicional indicada</td></tr>
           </table>
-          <div style="margin-top:var(--space-2);color:var(--color-text-muted);" data-es="Sensibilidad 91.4% / Especificidad 96.0% (AUC 0.94)" data-en="Sensitivity 91.4% / Specificity 96.0% (AUC 0.94)">Sensibilidad 91.4% / Especificidad 96.0% (AUC 0.94)</div>
+          <div style="margin-top:var(--space-2);color:var(--color-text-muted);" data-es="Sensibilidad 91.4% / Especificidad 96.0% (AUC 0.94)" data-en="Sensitivity 91.4% / Specificity 96.0% (AUC 0.94)">Sensitivity 91.4% / Specificity 96.0% (AUC 0.94)</div>
         </div>
 
           <!-- ── Dual Results View ── -->
@@ -1368,18 +1369,18 @@ a, button, [role='button'], input, select {
 
         <div class="score-actions" style="margin-top:var(--space-4);">
           <button type="button" class="btn-secondary" onclick="copyNote()">
-            <span id="copyBtnLabel" data-es="Copiar resumen" data-en="Copy summary">Copiar resumen</span>
+            <span id="copyBtnLabel" data-es="Copiar resumen" data-en="Copy summary">Copy summary</span>
           </button>
           <span class="copy-feedback" id="copyFeedback"></span>
           <button type="button" class="btn-secondary" onclick="resetForm()">
-            <span data-es="Reiniciar" data-en="Reset">Reiniciar</span>
+            <span data-es="Reiniciar" data-en="Reset">Reset</span>
           </button>
         </div>
       </div>
 
       <div class="copyright-footer">
-        <strong data-es="Derechos de autor:" data-en="Copyright:">Derechos de autor:</strong>
-        <span data-es=" ASRS-5 — Adult ADHD Self-Report Scale for DSM-5. © Organización Mundial de la Salud y Harvard Medical School. Desarrollada por Ustun TB, Adler L, Rudin C, et al. (2017). JAMA Psychiatry, 74(5), 520–527. Reproducido con fines clínicos no comerciales. No para distribución masiva ni uso con fines de lucro." data-en=" ASRS-5 — Adult ADHD Self-Report Scale for DSM-5. © World Health Organization and Harvard Medical School. Developed by Ustun TB, Adler L, Rudin C, et al. (2017). JAMA Psychiatry, 74(5), 520–527. Reproduced for non-commercial clinical use. Not for mass distribution or use for profit."> ASRS-5 — Adult ADHD Self-Report Scale for DSM-5. © Organización Mundial de la Salud y Harvard Medical School. Desarrollada por Ustun TB, Adler L, Rudin C, et al. (2017). JAMA Psychiatry, 74(5), 520–527. Reproducido con fines clínicos no comerciales. No para distribución masiva ni uso con fines de lucro.</span>
+        <strong data-es="Derechos de autor:" data-en="Copyright:">Copyright:</strong>
+        <span data-es=" ASRS-5 — Adult ADHD Self-Report Scale for DSM-5. © Organización Mundial de la Salud y Harvard Medical School. Desarrollada por Ustun TB, Adler L, Rudin C, et al. (2017). JAMA Psychiatry, 74(5), 520–527. Reproducido con fines clínicos no comerciales. No para distribución masiva ni uso con fines de lucro." data-en=" ASRS-5 — Adult ADHD Self-Report Scale for DSM-5. © World Health Organization and Harvard Medical School. Developed by Ustun TB, Adler L, Rudin C, et al. (2017). JAMA Psychiatry, 74(5), 520–527. Reproduced for non-commercial clinical use. Not for mass distribution or use for profit."> ASRS-5 — Adult ADHD Self-Report Scale for DSM-5. © World Health Organization and Harvard Medical School. Developed by Ustun TB, Adler L, Rudin C, et al. (2017). JAMA Psychiatry, 74(5), 520–527. Reproduced for non-commercial clinical use. Not for mass distribution or use for profit.</span>
       </div>
 
     </div>

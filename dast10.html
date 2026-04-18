@@ -696,10 +696,11 @@ a, button, [role='button'], input, select {
   margin-top: var(--space-3);
   flex-wrap: nowrap;
 }
-/* Expand radio-group to fill card width — break out of number badge indent */
+/* Expand radio-group to fill card width — break out of number badge indent + reduce side margin */
 .question-section .radio-group {
-  margin-left: calc(-28px - var(--space-4));
-  width: calc(100% + 28px + var(--space-4));
+  margin-left: calc(-28px - var(--space-4) - 1rem);
+  margin-right: -1rem;
+  width: calc(100% + 28px + var(--space-4) + 2rem);
 }
 
 .radio-option {
@@ -1362,7 +1363,7 @@ a, button, [role='button'], input, select {
       <div style="display:flex; align-items:center; gap:var(--space-3);">
         <div>
           <div class="topbar-title">DAST-10</div>
-          <div class="topbar-subtitle" data-es="Prueba de Detección de Abuso de Drogas" data-en="Drug Abuse Screening Test">Prueba de Detección de Abuso de Drogas</div>
+          <div class="topbar-subtitle" data-es="Prueba de Detección de Abuso de Drogas" data-en="Drug Abuse Screening Test">Drug Abuse Screening Test</div>
         </div>
       </div>
       <div class="topbar-actions">
@@ -1387,28 +1388,28 @@ a, button, [role='button'], input, select {
 
     <div class="tool-header-card">
       <h1>DAST-10</h1>
-      <p data-es="Prueba de Detección de Abuso de Drogas — cribado de uso problemático de sustancias en adolescentes. No incluye alcohol." data-en="Drug Abuse Screening Test — screens for problematic drug use in adolescents. Does not include alcohol.">Prueba de Detección de Abuso de Drogas — cribado de uso problemático de sustancias en adolescentes. No incluye alcohol.</p>
+      <p data-es="Prueba de Detección de Abuso de Drogas — cribado de uso problemático de sustancias en adolescentes. No incluye alcohol." data-en="Drug Abuse Screening Test — screens for problematic drug use in adolescents. Does not include alcohol.">Drug Abuse Screening Test — screens for problematic drug use in adolescents. Does not include alcohol.</p>
       <div class="tool-header-meta">
-        <span data-es="10 ítems" data-en="10 items">10 ítems</span>
-        <span data-es="Corte clínico: ≥3" data-en="Clinical cutoff: ≥3">Corte clínico: ≥3</span>
-        <span data-es="Escala: Sí/No" data-en="Scale: Yes/No">Escala: Sí/No</span>
+        <span data-es="10 ítems" data-en="10 items">10 items</span>
+        <span data-es="Corte clínico: ≥3" data-en="Clinical cutoff: ≥3">Clinical cutoff: ≥3</span>
+        <span data-es="Escala: Sí/No" data-en="Scale: Yes/No">Scale: Yes/No</span>
       </div>
     </div>
 
     <div class="instructions-box">
-      <h3 data-es="Instrucciones" data-en="Instructions">Instrucciones</h3>
+      <h3 data-es="Instrucciones" data-en="Instructions">Instructions</h3>
       <p data-es="Las siguientes preguntas se refieren al uso de drogas en los ÚLTIMOS 12 MESES. No incluye bebidas alcohólicas. 'Abuso de drogas' incluye: uso excesivo de medicamentos recetados o de venta libre, y cualquier uso no médico de drogas (cannabis, cocaína, estimulantes, alucinógenos, narcóticos, tranquilizantes, etc.)."
-         data-en="The following questions refer to drug use in the LAST 12 MONTHS. Does not include alcohol. 'Drug abuse' includes: overuse of prescription or OTC medications, and any non-medical use of drugs (cannabis, cocaine, stimulants, hallucinogens, narcotics, tranquilizers, etc.).">Las siguientes preguntas se refieren al uso de drogas en los ÚLTIMOS 12 MESES. No incluye bebidas alcohólicas. 'Abuso de drogas' incluye: uso excesivo de medicamentos recetados o de venta libre, y cualquier uso no médico de drogas (cannabis, cocaína, estimulantes, alucinógenos, narcóticos, tranquilizantes, etc.).</p>
+         data-en="The following questions refer to drug use in the LAST 12 MONTHS. Does not include alcohol. 'Drug abuse' includes: overuse of prescription or OTC medications, and any non-medical use of drugs (cannabis, cocaine, stimulants, hallucinogens, narcotics, tranquilizers, etc.).">The following questions refer to drug use in the LAST 12 MONTHS. Does not include alcohol. 'Drug abuse' includes: overuse of prescription or OTC medications, and any non-medical use of drugs (cannabis, cocaine, stimulants, hallucinogens, narcotics, tranquilizers, etc.).</p>
     </div>
 
     <form id="toolform" novalidate>
       <div id="questions-container"></div>
 
       <div class="score-panel" id="scorePanel">
-        <div class="score-panel-title" data-es="Resultados" data-en="Results">Resultados</div>
+        <div class="score-panel-title" data-es="Resultados" data-en="Results">Results</div>
         <div style="display:flex; align-items:flex-end; gap:var(--space-6); flex-wrap:wrap; margin-bottom:var(--space-4);">
           <div>
-            <div style="font-size:var(--text-xs); color:var(--color-text-muted); margin-bottom:var(--space-1);" data-es="Puntuación Total" data-en="Total Score">Puntuación Total</div>
+            <div style="font-size:var(--text-xs); color:var(--color-text-muted); margin-bottom:var(--space-1);" data-es="Puntuación Total" data-en="Total Score">Total Score</div>
             <div class="score-display">
               <span class="score-total" id="totalScore">0</span>
               <span class="score-max">/ 10</span>
@@ -1421,11 +1422,11 @@ a, button, [role='button'], input, select {
                   <div class="score-actions">
             <button type="button" class="btn-secondary" onclick="copyNote()">
               <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-              <span data-es="Copiar resumen" data-en="Copy Summary">Copiar resumen</span>
+              <span data-es="Copiar resumen" data-en="Copy Summary">Copy Summary</span>
             </button>
             <button type="button" class="btn-secondary" onclick="resetForm()">
               <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
-              <span data-es="Reiniciar" data-en="Reset">Reiniciar</span>
+              <span data-es="Reiniciar" data-en="Reset">Reset</span>
             </button>
             <span class="copy-feedback" id="copyFeedback">¡Copiado!</span>
           </div>
@@ -1465,8 +1466,8 @@ a, button, [role='button'], input, select {
   </div>
 
   <div class="copyright-footer">
-    <strong data-es="Derechos de autor:" data-en="Copyright:">Derechos de autor:</strong>
-    <span data-es=" DAST-10 (Drug Abuse Screening Test — 10 item version). © Harvey A. Skinner, 1982. Permitido el uso para fines clínicos, educativos y de investigación sin fines de lucro. No para distribución masiva ni uso comercial." data-en=" DAST-10 (Drug Abuse Screening Test — 10 item version). © Harvey A. Skinner, 1982. Permitted for non-profit clinical, educational, and research use. Not for mass distribution or commercial use."> DAST-10 (Drug Abuse Screening Test — 10 item version). © Harvey A. Skinner, 1982. Permitido el uso para fines clínicos, educativos y de investigación sin fines de lucro. No para distribución masiva ni uso comercial.</span>
+    <strong data-es="Derechos de autor:" data-en="Copyright:">Copyright:</strong>
+    <span data-es=" DAST-10 (Drug Abuse Screening Test — 10 item version). © Harvey A. Skinner, 1982. Permitido el uso para fines clínicos, educativos y de investigación sin fines de lucro. No para distribución masiva ni uso comercial." data-en=" DAST-10 (Drug Abuse Screening Test — 10 item version). © Harvey A. Skinner, 1982. Permitted for non-profit clinical, educational, and research use. Not for mass distribution or commercial use."> DAST-10 (Drug Abuse Screening Test — 10 item version). © Harvey A. Skinner, 1982. Permitted for non-profit clinical, educational, and research use. Not for mass distribution or commercial use.</span>
   </div>
 
 </main>
@@ -1504,7 +1505,7 @@ function renderQuestions() {
     div.className = 'question-section';
     div.id = `qsec${q.n}`;
     const revNote = q.rev
-      ? `<div class="gate-notice" style="margin-top:var(--space-2);"><span data-es="Nota: Para esta pregunta, 'No' suma 1 punto." data-en="Note: For this question, 'No' scores 1 point.">Nota: Para esta pregunta, 'No' suma 1 punto.</span></div>`
+      ? `<div class="gate-notice" style="margin-top:var(--space-2);"><span data-es="Nota: Para esta pregunta, 'No' suma 1 punto." data-en="Note: For this question, 'No' scores 1 point.">Note: For this question, 'No' scores 1 point.</span></div>`
       : '';
     div.innerHTML = `
       <div class="question-row">

@@ -696,10 +696,11 @@ a, button, [role='button'], input, select {
   margin-top: var(--space-3);
   flex-wrap: nowrap;
 }
-/* Expand radio-group to fill card width — break out of number badge indent */
+/* Expand radio-group to fill card width — break out of number badge indent + reduce side margin */
 .question-section .radio-group {
-  margin-left: calc(-28px - var(--space-4));
-  width: calc(100% + 28px + var(--space-4));
+  margin-left: calc(-28px - var(--space-4) - 1rem);
+  margin-right: -1rem;
+  width: calc(100% + 28px + var(--space-4) + 2rem);
 }
 
 .radio-option {
@@ -1363,7 +1364,7 @@ a, button, [role='button'], input, select {
       <div style="display:flex; align-items:center; gap:var(--space-3);">
         <div>
           <div class="topbar-title">CRAFFT 2.1</div>
-          <div class="topbar-subtitle" data-es="Cribado de Sustancias en Adolescentes" data-en="Adolescent Substance Use Screening">Cribado de Sustancias en Adolescentes</div>
+          <div class="topbar-subtitle" data-es="Cribado de Sustancias en Adolescentes" data-en="Adolescent Substance Use Screening">Adolescent Substance Use Screening</div>
         </div>
       </div>
       <div class="topbar-actions">
@@ -1388,23 +1389,23 @@ a, button, [role='button'], input, select {
 
     <div class="tool-header-card">
       <h1>CRAFFT 2.1</h1>
-      <p data-es="Cuestionario de cribado de uso de alcohol y drogas para adolescentes. El acrónimo CRAFFT representa las palabras clave de cada pregunta." data-en="Alcohol and drug use screening tool for adolescents. CRAFFT is an acronym for the key word in each question.">Cuestionario de cribado de uso de alcohol y drogas para adolescentes. El acrónimo CRAFFT representa las palabras clave de cada pregunta.</p>
+      <p data-es="Cuestionario de cribado de uso de alcohol y drogas para adolescentes. El acrónimo CRAFFT representa las palabras clave de cada pregunta." data-en="Alcohol and drug use screening tool for adolescents. CRAFFT is an acronym for the key word in each question.">Alcohol and drug use screening tool for adolescents. CRAFFT is an acronym for the key word in each question.</p>
       <div class="tool-header-meta">
-        <span data-es="Parte A: 3 frecuencias + Parte B: 6 Sí/No" data-en="Part A: 3 frequency items + Part B: 6 Yes/No">Parte A: 3 frecuencias + Parte B: 6 Sí/No</span>
-        <span data-es="Corte: ≥2 (Parte B)" data-en="Cutoff: ≥2 (Part B)">Corte: ≥2 (Parte B)</span>
+        <span data-es="Parte A: 3 frecuencias + Parte B: 6 Sí/No" data-en="Part A: 3 frequency items + Part B: 6 Yes/No">Part A: 3 frequency items + Part B: 6 Yes/No</span>
+        <span data-es="Corte: ≥2 (Parte B)" data-en="Cutoff: ≥2 (Part B)">Cutoff: ≥2 (Part B)</span>
       </div>
     </div>
 
     <div class="instructions-box">
-      <h3 data-es="Instrucciones" data-en="Instructions">Instrucciones</h3>
-      <p data-es="Por favor, contesta todas las preguntas honestamente. Tus respuestas son confidenciales." data-en="Please answer all questions honestly. Your answers are confidential.">Por favor, contesta todas las preguntas honestamente. Tus respuestas son confidenciales.</p>
+      <h3 data-es="Instrucciones" data-en="Instructions">Instructions</h3>
+      <p data-es="Por favor, contesta todas las preguntas honestamente. Tus respuestas son confidenciales." data-en="Please answer all questions honestly. Your answers are confidential.">Please answer all questions honestly. Your answers are confidential.</p>
     </div>
 
     <form id="toolform" novalidate>
 
       <!-- PART A -->
       <div class="part-divider">
-        <span data-es="Parte A — Durante los ÚLTIMOS 12 MESES, ¿cuántos días...?" data-en="Part A — During the PAST 12 MONTHS, on how many days did you...?">Parte A — Durante los ÚLTIMOS 12 MESES, ¿cuántos días...?</span>
+        <span data-es="Parte A — Durante los ÚLTIMOS 12 MESES, ¿cuántos días...?" data-en="Part A — During the PAST 12 MONTHS, on how many days did you...?">Part A — During the PAST 12 MONTHS, on how many days did you...?</span>
       </div>
 
       <div class="question-section" id="qsecA1">
@@ -1415,7 +1416,7 @@ a, button, [role='button'], input, select {
             <div class="question-text-en">Drank more than a few sips of <strong>beer, wine, or any drink containing alcohol</strong>? Write "0" if none.</div>
             <div style="margin-top:var(--space-3);">
               <label style="display:flex; align-items:center; gap:var(--space-3); font-size:var(--text-sm);">
-                <span data-es="Nº de días:" data-en="No. of days:">Nº de días:</span>
+                <span data-es="Nº de días:" data-en="No. of days:">No. of days:</span>
                 <input type="number" id="partA1" min="0" max="365" value="0"
                   style="width:80px; padding:6px 10px; border-radius:var(--radius-md); border:1px solid var(--color-border); background:var(--color-surface); color:var(--color-text); font-size:var(--text-base);"
                   oninput="onPartAChange()">
@@ -1433,7 +1434,7 @@ a, button, [role='button'], input, select {
             <div class="question-text-en">Used <strong>marijuana</strong> (weed, hash, or cannabis for smoking, vaping, or in food) or "synthetic marijuana" (K2 or Spice)? Write "0" if none.</div>
             <div style="margin-top:var(--space-3);">
               <label style="display:flex; align-items:center; gap:var(--space-3); font-size:var(--text-sm);">
-                <span data-es="Nº de días:" data-en="No. of days:">Nº de días:</span>
+                <span data-es="Nº de días:" data-en="No. of days:">No. of days:</span>
                 <input type="number" id="partA2" min="0" max="365" value="0"
                   style="width:80px; padding:6px 10px; border-radius:var(--radius-md); border:1px solid var(--color-border); background:var(--color-surface); color:var(--color-text); font-size:var(--text-base);"
                   oninput="onPartAChange()">
@@ -1451,7 +1452,7 @@ a, button, [role='button'], input, select {
             <div class="question-text-en">Used anything else to get high (other illegal drugs, pills, or things you sniff, huff, or vape)? Write "0" if none.</div>
             <div style="margin-top:var(--space-3);">
               <label style="display:flex; align-items:center; gap:var(--space-3); font-size:var(--text-sm);">
-                <span data-es="Nº de días:" data-en="No. of days:">Nº de días:</span>
+                <span data-es="Nº de días:" data-en="No. of days:">No. of days:</span>
                 <input type="number" id="partA3" min="0" max="365" value="0"
                   style="width:80px; padding:6px 10px; border-radius:var(--radius-md); border:1px solid var(--color-border); background:var(--color-surface); color:var(--color-text); font-size:var(--text-base);"
                   oninput="onPartAChange()">
@@ -1463,21 +1464,21 @@ a, button, [role='button'], input, select {
 
       <!-- Gate notice -->
       <div class="gate-notice" id="gateNotice">
-        <span id="gateText" data-es="Si escribiste 0 en TODOS los campos anteriores: responde solo la pregunta C (nº 4) y detente. Si escribiste 1 o más en CUALQUIERA: responde todas las preguntas (4 a 9)." data-en="If you wrote 0 in ALL boxes above: answer only question C (no. 4) and stop. If you wrote 1 or more in ANY box: answer all questions (4 to 9).">Si escribiste 0 en TODOS los campos anteriores: responde solo la pregunta C (nº 4) y detente. Si escribiste 1 o más en CUALQUIERA: responde todas las preguntas (4 a 9).</span>
+        <span id="gateText" data-es="Si escribiste 0 en TODOS los campos anteriores: responde solo la pregunta C (nº 4) y detente. Si escribiste 1 o más en CUALQUIERA: responde todas las preguntas (4 a 9)." data-en="If you wrote 0 in ALL boxes above: answer only question C (no. 4) and stop. If you wrote 1 or more in ANY box: answer all questions (4 to 9).">If you wrote 0 in ALL boxes above: answer only question C (no. 4) and stop. If you wrote 1 or more in ANY box: answer all questions (4 to 9).</span>
       </div>
 
       <!-- PART B -->
       <div class="part-divider">
-        <span data-es="Parte B — CRAFFT (responde Sí o No)" data-en="Part B — CRAFFT (answer Yes or No)">Parte B — CRAFFT (responde Sí o No)</span>
+        <span data-es="Parte B — CRAFFT (responde Sí o No)" data-en="Part B — CRAFFT (answer Yes or No)">Part B — CRAFFT (answer Yes or No)</span>
       </div>
 
       <div id="partB-container"></div>
 
       <div class="score-panel" id="scorePanel">
-        <div class="score-panel-title" data-es="Resultados" data-en="Results">Resultados</div>
+        <div class="score-panel-title" data-es="Resultados" data-en="Results">Results</div>
         <div style="display:flex; align-items:flex-end; gap:var(--space-6); flex-wrap:wrap; margin-bottom:var(--space-4);">
           <div>
-            <div style="font-size:var(--text-xs); color:var(--color-text-muted); margin-bottom:var(--space-1);" data-es="Puntuación CRAFFT (Parte B)" data-en="CRAFFT Score (Part B)">Puntuación CRAFFT (Parte B)</div>
+            <div style="font-size:var(--text-xs); color:var(--color-text-muted); margin-bottom:var(--space-1);" data-es="Puntuación CRAFFT (Parte B)" data-en="CRAFFT Score (Part B)">CRAFFT Score (Part B)</div>
             <div class="score-display">
               <span class="score-total" id="totalScore">0</span>
               <span class="score-max">/ 6</span>
@@ -1490,11 +1491,11 @@ a, button, [role='button'], input, select {
                   <div class="score-actions">
             <button type="button" class="btn-secondary" onclick="copyNote()">
               <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-              <span data-es="Copiar resumen" data-en="Copy Summary">Copiar resumen</span>
+              <span data-es="Copiar resumen" data-en="Copy Summary">Copy Summary</span>
             </button>
             <button type="button" class="btn-secondary" onclick="resetForm()">
               <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
-              <span data-es="Reiniciar" data-en="Reset">Reiniciar</span>
+              <span data-es="Reiniciar" data-en="Reset">Reset</span>
             </button>
             <span class="copy-feedback" id="copyFeedback">¡Copiado!</span>
           </div>
@@ -1534,8 +1535,8 @@ a, button, [role='button'], input, select {
   </div>
 
   <div class="copyright-footer">
-    <strong data-es="Derechos de autor:" data-en="Copyright:">Derechos de autor:</strong>
-    <span data-es=" CRAFFT 2.1. © John R. Knight, MD, Boston Children's Hospital, 2018. Reproducción autorizada por el Center for Adolescent Substance Abuse Research (CeASAR), Boston Children's Hospital. Para uso clínico no comercial. No para distribución masiva ni uso con fines de lucro. Más información: crafft.org" data-en=" CRAFFT 2.1. © John R. Knight, MD, Boston Children's Hospital, 2018. Reproduction authorized by the Center for Adolescent Substance Abuse Research (CeASAR), Boston Children's Hospital. For non-commercial clinical use only. Not for mass distribution or use for profit. More info: crafft.org"> CRAFFT 2.1. © John R. Knight, MD, Boston Children's Hospital, 2018. Reproducción autorizada por el Center for Adolescent Substance Abuse Research (CeASAR), Boston Children's Hospital. Para uso clínico no comercial. No para distribución masiva ni uso con fines de lucro. Más información: crafft.org</span>
+    <strong data-es="Derechos de autor:" data-en="Copyright:">Copyright:</strong>
+    <span data-es=" CRAFFT 2.1. © John R. Knight, MD, Boston Children's Hospital, 2018. Reproducción autorizada por el Center for Adolescent Substance Abuse Research (CeASAR), Boston Children's Hospital. Para uso clínico no comercial. No para distribución masiva ni uso con fines de lucro. Más información: crafft.org" data-en=" CRAFFT 2.1. © John R. Knight, MD, Boston Children's Hospital, 2018. Reproduction authorized by the Center for Adolescent Substance Abuse Research (CeASAR), Boston Children's Hospital. For non-commercial clinical use only. Not for mass distribution or use for profit. More info: crafft.org"> CRAFFT 2.1. © John R. Knight, MD, Boston Children's Hospital, 2018. Reproduction authorized by the Center for Adolescent Substance Abuse Research (CeASAR), Boston Children's Hospital. For non-commercial clinical use only. Not for mass distribution or use for profit. More info: crafft.org</span>
   </div>
 
 </main>
@@ -1606,7 +1607,7 @@ function renderPartB() {
   if (allZero) {
     const notice = document.createElement('div');
     notice.className = 'gate-notice';
-    notice.innerHTML = '<span data-es="Todos los días son 0: solo responde la pregunta C (arriba) y detente aquí." data-en="All days are 0: answer only question C (above) and stop here.">Todos los días son 0: solo responde la pregunta C (arriba) y detente aquí.</span>';
+    notice.innerHTML = '<span data-es="Todos los días son 0: solo responde la pregunta C (arriba) y detente aquí." data-en="All days are 0: answer only question C (above) and stop here.">All days are 0: answer only question C (above) and stop here.</span>';
     container.appendChild(notice);
   }
 

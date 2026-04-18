@@ -696,10 +696,11 @@ a, button, [role='button'], input, select {
   margin-top: var(--space-3);
   flex-wrap: nowrap;
 }
-/* Expand radio-group to fill card width — break out of number badge indent */
+/* Expand radio-group to fill card width — break out of number badge indent + reduce side margin */
 .question-section .radio-group {
-  margin-left: calc(-28px - var(--space-4));
-  width: calc(100% + 28px + var(--space-4));
+  margin-left: calc(-28px - var(--space-4) - 1rem);
+  margin-right: -1rem;
+  width: calc(100% + 28px + var(--space-4) + 2rem);
 }
 
 .radio-option {
@@ -1369,7 +1370,7 @@ a, button, [role='button'], input, select {
       <div style="display:flex; align-items:center; gap:var(--space-3);">
         <div>
           <div class="topbar-title">SNAP-IV</div>
-          <div class="topbar-subtitle" data-es="Escala de Calificación TDAH (8–18 años)" data-en="ADHD Rating Scale (8–18 years)">Escala de Calificación TDAH (8–18 años)</div>
+          <div class="topbar-subtitle" data-es="Escala de Calificación TDAH (8–18 años)" data-en="ADHD Rating Scale (8–18 years)">ADHD Rating Scale (8–18 years)</div>
         </div>
       </div>
       <div class="topbar-actions">
@@ -1394,33 +1395,33 @@ a, button, [role='button'], input, select {
 
     <div class="tool-header-card">
       <h1>SNAP-IV</h1>
-      <p data-es="Escala de Calificación de Maestros y Padres — 26 ítems. Evalúa inatención, hiperactividad/impulsividad y trastorno negativista desafiante (TND) en niños/adolescentes de 8 a 18 años." data-en="Swanson, Nolan and Pelham Rating Scale — 26 items. Assesses inattention, hyperactivity/impulsivity, and oppositional defiant disorder (ODD) in children/adolescents ages 8–18.">Escala de Calificación de Maestros y Padres — 26 ítems. Evalúa inatención, hiperactividad/impulsividad y trastorno negativista desafiante (TND) en niños/adolescentes de 8 a 18 años.</p>
+      <p data-es="Escala de Calificación de Maestros y Padres — 26 ítems. Evalúa inatención, hiperactividad/impulsividad y trastorno negativista desafiante (TND) en niños/adolescentes de 8 a 18 años." data-en="Swanson, Nolan and Pelham Rating Scale — 26 items. Assesses inattention, hyperactivity/impulsivity, and oppositional defiant disorder (ODD) in children/adolescents ages 8–18.">Swanson, Nolan and Pelham Rating Scale — 26 items. Assesses inattention, hyperactivity/impulsivity, and oppositional defiant disorder (ODD) in children/adolescents ages 8–18.</p>
       <div class="tool-header-meta">
-        <span data-es="26 ítems" data-en="26 items">26 ítems</span>
-        <span data-es="Escala: 0–3" data-en="Scale: 0–3">Escala: 0–3</span>
-        <span data-es="Completado por: padre/madre o maestro/a" data-en="Completed by: parent or teacher">Completado por: padre/madre o maestro/a</span>
+        <span data-es="26 ítems" data-en="26 items">26 items</span>
+        <span data-es="Escala: 0–3" data-en="Scale: 0–3">Scale: 0–3</span>
+        <span data-es="Completado por: padre/madre o maestro/a" data-en="Completed by: parent or teacher">Completed by: parent or teacher</span>
       </div>
     </div>
 
     <div class="instructions-box">
-      <h3 data-es="Instrucciones" data-en="Instructions">Instrucciones</h3>
-      <p data-es="Para cada ítem, marca la columna que mejor describe a este niño/adolescente. Escala: Para nada (0), Sólo un poco (1), Bastante (2), Muy mucho (3)." data-en="For each item, check the column that best describes this child/adolescent. Scale: Not at all (0), Just a little (1), Pretty much (2), Very much (3).">Para cada ítem, marca la columna que mejor describe a este niño/adolescente. Escala: Para nada (0), Sólo un poco (1), Bastante (2), Muy mucho (3).</p>
+      <h3 data-es="Instrucciones" data-en="Instructions">Instructions</h3>
+      <p data-es="Para cada ítem, marca la columna que mejor describe a este niño/adolescente. Escala: Para nada (0), Sólo un poco (1), Bastante (2), Muy mucho (3)." data-en="For each item, check the column that best describes this child/adolescent. Scale: Not at all (0), Just a little (1), Pretty much (2), Very much (3).">For each item, check the column that best describes this child/adolescent. Scale: Not at all (0), Just a little (1), Pretty much (2), Very much (3).</p>
     </div>
 
-    <span data-es="Inatención (IN) — ítems 1–9 | Corte clínico: ≥13/27" data-en="Inattention (IN) — items 1–9 | Clinical cutoff: ≥13/27">Inatención (IN) — ítems 1–9 | Corte clínico: ≥13/27</span></div>
+    <span data-es="Inatención (IN) — ítems 1–9 | Corte clínico: ≥13/27" data-en="Inattention (IN) — items 1–9 | Clinical cutoff: ≥13/27">Inattention (IN) — items 1–9 | Clinical cutoff: ≥13/27</span></div>
       </div>
 
     <form id="toolform" novalidate>
       <div id="questions-container"></div>
 
       <div class="subscale-legend">
-        <div class="legend-item"><div class="legend-dot" style="background:#0369a1"></div><span data-es="Inatención (IN) — ítems 1–9 | Corte clínico: ≥13/27" data-en="Inattention (IN) — items 1–9 | Clinical cutoff: ≥13/27">Inatención (IN) — ítems 1–9 | Corte clínico: ≥13/27</span></div>
+        <div class="legend-item"><div class="legend-dot" style="background:#0369a1"></div><span data-es="Inatención (IN) — ítems 1–9 | Corte clínico: ≥13/27" data-en="Inattention (IN) — items 1–9 | Clinical cutoff: ≥13/27">Inattention (IN) — items 1–9 | Clinical cutoff: ≥13/27</span></div>
       </div>
       <div class="score-panel" id="scorePanel">
-        <div class="score-panel-title" data-es="Resultados" data-en="Results">Resultados</div>
+        <div class="score-panel-title" data-es="Resultados" data-en="Results">Results</div>
         <div style="display:flex; align-items:flex-end; gap:var(--space-6); flex-wrap:wrap; margin-bottom:var(--space-4);">
           <div>
-            <div style="font-size:var(--text-xs); color:var(--color-text-muted); margin-bottom:var(--space-1);" data-es="Puntuación Total" data-en="Total Score">Puntuación Total</div>
+            <div style="font-size:var(--text-xs); color:var(--color-text-muted); margin-bottom:var(--space-1);" data-es="Puntuación Total" data-en="Total Score">Total Score</div>
             <div class="score-display">
               <span class="score-total" id="totalScore">0</span>
               <span class="score-max">/ 78</span>
@@ -1433,29 +1434,29 @@ a, button, [role='button'], input, select {
         
           <div class="subscale-grid">
             <div class="subscale-item" id="subIN">
-              <div class="subscale-label" data-es="Inatención (ítems 1–9)" data-en="Inattention (items 1–9)">Inatención (ítems 1–9)</div>
+              <div class="subscale-label" data-es="Inatención (ítems 1–9)" data-en="Inattention (items 1–9)">Inattention (items 1–9)</div>
               <div class="subscale-score" id="score_subIN">0</div>
-              <div class="subscale-cutoff" data-es="Clínico: ≥13/27" data-en="Clinical: ≥13/27">Clínico: ≥13/27</div>
+              <div class="subscale-cutoff" data-es="Clínico: ≥13/27" data-en="Clinical: ≥13/27">Clinical: ≥13/27</div>
             </div>
             <div class="subscale-item" id="subHI">
-              <div class="subscale-label" data-es="Hiperact./Impulsividad (ítems 10–18)" data-en="Hyperact./Impulsivity (items 10–18)">Hiperact./Impulsividad (ítems 10–18)</div>
+              <div class="subscale-label" data-es="Hiperact./Impulsividad (ítems 10–18)" data-en="Hyperact./Impulsivity (items 10–18)">Hyperact./Impulsivity (items 10–18)</div>
               <div class="subscale-score" id="score_subHI">0</div>
-              <div class="subscale-cutoff" data-es="Clínico: ≥13/27" data-en="Clinical: ≥13/27">Clínico: ≥13/27</div>
+              <div class="subscale-cutoff" data-es="Clínico: ≥13/27" data-en="Clinical: ≥13/27">Clinical: ≥13/27</div>
             </div>
             <div class="subscale-item" id="subODD">
-              <div class="subscale-label" data-es="Oposición/Desafío (ítems 19–26)" data-en="ODD (items 19–26)">Oposición/Desafío (ítems 19–26)</div>
+              <div class="subscale-label" data-es="Oposición/Desafío (ítems 19–26)" data-en="ODD (items 19–26)">ODD (items 19–26)</div>
               <div class="subscale-score" id="score_subODD">0</div>
-              <div class="subscale-cutoff" data-es="Clínico: ≥8/24" data-en="Clinical: ≥8/24">Clínico: ≥8/24</div>
+              <div class="subscale-cutoff" data-es="Clínico: ≥8/24" data-en="Clinical: ≥8/24">Clinical: ≥8/24</div>
             </div>
           </div>
                   <div class="score-actions">
             <button type="button" class="btn-secondary" onclick="copyNote()">
               <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-              <span data-es="Copiar resumen" data-en="Copy Summary">Copiar resumen</span>
+              <span data-es="Copiar resumen" data-en="Copy Summary">Copy Summary</span>
             </button>
             <button type="button" class="btn-secondary" onclick="resetForm()">
               <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
-              <span data-es="Reiniciar" data-en="Reset">Reiniciar</span>
+              <span data-es="Reiniciar" data-en="Reset">Reset</span>
             </button>
             <span class="copy-feedback" id="copyFeedback">¡Copiado!</span>
           </div>
@@ -1495,8 +1496,8 @@ a, button, [role='button'], input, select {
   </div>
 
   <div class="copyright-footer">
-    <strong data-es="Derechos de autor:" data-en="Copyright:">Derechos de autor:</strong>
-    <span data-es=" SNAP-IV. © James M. Swanson, PhD, University of California, Irvine. Reproducido con permiso del autor para uso clínico y de investigación sin fines de lucro. Todos los derechos reservados. No para distribución masiva ni uso comercial." data-en=" SNAP-IV. © James M. Swanson, PhD, University of California, Irvine. Reproduced with permission from the author for non-profit clinical and research use. All rights reserved. Not for mass distribution or commercial use."> SNAP-IV. © James M. Swanson, PhD, University of California, Irvine. Reproducido con permiso del autor para uso clínico y de investigación sin fines de lucro. Todos los derechos reservados. No para distribución masiva ni uso comercial.</span>
+    <strong data-es="Derechos de autor:" data-en="Copyright:">Copyright:</strong>
+    <span data-es=" SNAP-IV. © James M. Swanson, PhD, University of California, Irvine. Reproducido con permiso del autor para uso clínico y de investigación sin fines de lucro. Todos los derechos reservados. No para distribución masiva ni uso comercial." data-en=" SNAP-IV. © James M. Swanson, PhD, University of California, Irvine. Reproduced with permission from the author for non-profit clinical and research use. All rights reserved. Not for mass distribution or commercial use."> SNAP-IV. © James M. Swanson, PhD, University of California, Irvine. Reproduced with permission from the author for non-profit clinical and research use. All rights reserved. Not for mass distribution or commercial use.</span>
   </div>
 
 </main>

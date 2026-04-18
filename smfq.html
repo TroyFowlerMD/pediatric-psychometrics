@@ -696,10 +696,11 @@ a, button, [role='button'], input, select {
   margin-top: var(--space-3);
   flex-wrap: nowrap;
 }
-/* Expand radio-group to fill card width — break out of number badge indent */
+/* Expand radio-group to fill card width — break out of number badge indent + reduce side margin */
 .question-section .radio-group {
-  margin-left: calc(-28px - var(--space-4));
-  width: calc(100% + 28px + var(--space-4));
+  margin-left: calc(-28px - var(--space-4) - 1rem);
+  margin-right: -1rem;
+  width: calc(100% + 28px + var(--space-4) + 2rem);
 }
 
 .radio-option {
@@ -1397,21 +1398,21 @@ a, button, [role='button'], input, select {
       <!-- Header card -->
       <div class="tool-header-card">
         <h1>SMFQ-C</h1>
-        <p data-es="Short Mood and Feelings Questionnaire — Child (SMFQ-C). Herramienta estándar de cribado y monitoreo de depresión en el flujo CoCM. Autoinforme del niño/a, jóvenes ≤11 años." data-en="Short Mood and Feelings Questionnaire — Child (SMFQ-C). Standard depression screening and monitoring tool in the CoCM workflow. Child self-report, youth ≤11 years.">Short Mood and Feelings Questionnaire — Child (SMFQ-C). Herramienta estándar de cribado y monitoreo de depresión en el flujo CoCM. Autoinforme del niño/a, jóvenes ≤11 años.</p>
+        <p data-es="Short Mood and Feelings Questionnaire — Child (SMFQ-C). Herramienta estándar de cribado y monitoreo de depresión en el flujo CoCM. Autoinforme del niño/a, jóvenes ≤11 años." data-en="Short Mood and Feelings Questionnaire — Child (SMFQ-C). Standard depression screening and monitoring tool in the CoCM workflow. Child self-report, youth ≤11 years.">Short Mood and Feelings Questionnaire — Child (SMFQ-C). Standard depression screening and monitoring tool in the CoCM workflow. Child self-report, youth ≤11 years.</p>
         <div class="tool-header-meta">
           <span>13 ítems</span>
-          <span data-es="Corte: ≥8" data-en="Cutoff: ≥8">Corte: ≥8</span>
-          <span data-es="Escala: 0–2" data-en="Scale: 0–2">Escala: 0–2</span>
+          <span data-es="Corte: ≥8" data-en="Cutoff: ≥8">Cutoff: ≥8</span>
+          <span data-es="Escala: 0–2" data-en="Scale: 0–2">Scale: 0–2</span>
         </div>
       </div>
 
       <!-- Instructions -->
       <div class="instructions-box">
-        <h3 data-es="Instrucciones" data-en="Instructions">Instrucciones</h3>
+        <h3 data-es="Instrucciones" data-en="Instructions">Instructions</h3>
         <p
           data-es="Para cada oración, indica qué tan cierto ha sido en las ÚLTIMAS DOS SEMANAS. Selecciona: No es cierto (0), A veces es cierto (1), o Es cierto (2)."
           data-en="For each statement, indicate how true it has been for you in the PAST TWO WEEKS. Select: Not true (0), Sometimes true (1), or True (2)."
-        >Para cada oración, indica qué tan cierto ha sido en las ÚLTIMAS DOS SEMANAS. Selecciona: No es cierto (0), A veces es cierto (1), o Es cierto (2).</p>
+        >For each statement, indicate how true it has been for you in the PAST TWO WEEKS. Select: Not true (0), Sometimes true (1), or True (2).</p>
       </div>
 
       
@@ -1421,11 +1422,11 @@ a, button, [role='button'], input, select {
         <div id="questions-container"></div>
 
         <div class="score-panel" id="scorePanel">
-          <div class="score-panel-title" data-es="Resultados" data-en="Results">Resultados</div>
+          <div class="score-panel-title" data-es="Resultados" data-en="Results">Results</div>
 
           <div style="display:flex; align-items:flex-end; gap:var(--space-6); flex-wrap:wrap; margin-bottom:var(--space-4);">
             <div>
-              <div style="font-size:var(--text-xs); color:var(--color-text-muted); margin-bottom:var(--space-1);" data-es="Puntuación Total" data-en="Total Score">Puntuación Total</div>
+              <div style="font-size:var(--text-xs); color:var(--color-text-muted); margin-bottom:var(--space-1);" data-es="Puntuación Total" data-en="Total Score">Total Score</div>
               <div class="score-display">
                 <span class="score-total" id="totalScore">0</span>
                 <span class="score-max">/ 26</span>
@@ -1440,13 +1441,13 @@ a, button, [role='button'], input, select {
           <div class="score-actions">
             <button type="button" class="btn-secondary" id="copyNoteBtn" onclick="copyNote()">
               <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-              <span data-es="Copiar resumen" data-en="Copy Summary">Copiar resumen</span>
+              <span data-es="Copiar resumen" data-en="Copy Summary">Copy Summary</span>
             </button>
             <button type="button" class="btn-secondary" onclick="resetForm()">
               <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
-              <span data-es="Reiniciar" data-en="Reset">Reiniciar</span>
+              <span data-es="Reiniciar" data-en="Reset">Reset</span>
             </button>
-            <span class="copy-feedback" id="copyFeedback" data-es="¡Copiado!" data-en="Copied!">¡Copiado!</span>
+            <span class="copy-feedback" id="copyFeedback" data-es="¡Copiado!" data-en="Copied!">Copied!</span>
           </div>
 
           <!-- ── Dual Results View ── -->
@@ -1487,8 +1488,8 @@ a, button, [role='button'], input, select {
     </div><!-- /page-content -->
   
   <div class="copyright-footer">
-    <strong data-es="Derechos de autor:" data-en="Copyright:">Derechos de autor:</strong>
-    <span data-es=" SMFQ-C (Short Mood and Feelings Questionnaire — Child). © Angold & Costello, 1987. Desarrollado en la Universidad de Duke. Reproducido con fines clínicos no comerciales. No para distribución masiva ni uso con fines de lucro." data-en=" SMFQ-C (Short Mood and Feelings Questionnaire — Child). © Angold & Costello, 1987. Developed at Duke University. Reproduced for non-commercial clinical use. Not for mass distribution or use for profit."> SMFQ-C (Short Mood and Feelings Questionnaire — Child). © Angold & Costello, 1987. Desarrollado en la Universidad de Duke. Reproducido con fines clínicos no comerciales. No para distribución masiva ni uso con fines de lucro.</span>
+    <strong data-es="Derechos de autor:" data-en="Copyright:">Copyright:</strong>
+    <span data-es=" SMFQ-C (Short Mood and Feelings Questionnaire — Child). © Angold & Costello, 1987. Desarrollado en la Universidad de Duke. Reproducido con fines clínicos no comerciales. No para distribución masiva ni uso con fines de lucro." data-en=" SMFQ-C (Short Mood and Feelings Questionnaire — Child). © Angold & Costello, 1987. Developed at Duke University. Reproduced for non-commercial clinical use. Not for mass distribution or use for profit."> SMFQ-C (Short Mood and Feelings Questionnaire — Child). © Angold & Costello, 1987. Developed at Duke University. Reproduced for non-commercial clinical use. Not for mass distribution or use for profit.</span>
   </div>
 
 </main>
