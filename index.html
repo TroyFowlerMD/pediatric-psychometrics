@@ -391,7 +391,7 @@
     </div>
     <div class="card-grid">
 
-      <a class="card" data-cat="depression" href="smfq.html">
+      <a class="card" data-cat="depression" data-tool="smfq" href="smfq-en.html">
         <div class="card-top">
           <span class="card-abbr">SMFQ-C</span>
           <span class="card-age">≤11</span>
@@ -399,7 +399,7 @@
         <span class="card-name" data-en="Short Mood &amp; Feelings Questionnaire — Child" data-es="Cuestionario Corto de Estado de Ánimo — Niño/a">Short Mood &amp; Feelings Questionnaire — Child</span>
       </a>
 
-      <a class="card" data-cat="depression" href="mfq-parent.html">
+      <a class="card" data-cat="depression" data-tool="mfq-parent" href="mfq-parent-en.html">
         <div class="card-top">
           <span class="card-abbr">SMFQ-P</span>
           <span class="card-age">6–17</span>
@@ -407,7 +407,7 @@
         <span class="card-name" data-en="Short Mood &amp; Feelings Questionnaire — Parent" data-es="Cuestionario Corto de Estado de Ánimo — Padres">Short Mood &amp; Feelings Questionnaire — Parent</span>
       </a>
 
-      <a class="card" data-cat="depression" href="phqa.html">
+      <a class="card" data-cat="depression" data-tool="phqa" href="phqa-en.html">
         <div class="card-top">
           <span class="card-abbr">PHQ-A</span>
           <span class="card-age">≥12</span>
@@ -427,7 +427,7 @@
     </div>
     <div class="card-grid">
 
-      <a class="card" data-cat="anxiety" href="scared.html">
+      <a class="card" data-cat="anxiety" data-tool="scared" href="scared-en.html">
         <div class="card-top">
           <span class="card-abbr">SCARED-C</span>
           <span class="card-age">8–18</span>
@@ -435,7 +435,7 @@
         <span class="card-name" data-en="Screen for Child Anxiety — Child" data-es="Tamizaje de Ansiedad Infantil — Niño/a">Screen for Child Anxiety — Child</span>
       </a>
 
-      <a class="card" data-cat="anxiety" href="scared-parent.html">
+      <a class="card" data-cat="anxiety" data-tool="scared-parent" href="scared-parent-en.html">
         <div class="card-top">
           <span class="card-abbr">SCARED-P</span>
           <span class="card-age">8–18</span>
@@ -443,7 +443,7 @@
         <span class="card-name" data-en="Screen for Child Anxiety — Parent" data-es="Tamizaje de Ansiedad Infantil — Padres">Screen for Child Anxiety — Parent</span>
       </a>
 
-      <a class="card" data-cat="anxiety" href="gad7.html">
+      <a class="card" data-cat="anxiety" data-tool="gad7" href="gad7-en.html">
         <div class="card-top">
           <span class="card-abbr">GAD-7</span>
           <span class="card-age">≥12</span>
@@ -463,7 +463,7 @@
     </div>
     <div class="card-grid">
 
-      <a class="card" data-cat="adhd" href="cap.html">
+      <a class="card" data-cat="adhd" data-tool="cap" href="cap-en.html">
         <div class="card-top">
           <span class="card-abbr">CAP Scale</span>
           <span class="card-age">≤11, teacher</span>
@@ -471,7 +471,7 @@
         <span class="card-name" data-en="Children's Attention Problems" data-es="Escala CAP — Problemas de Atención Infantil">Children's Attention Problems</span>
       </a>
 
-      <a class="card" data-cat="adhd" href="snapiv.html">
+      <a class="card" data-cat="adhd" data-tool="snapiv" href="snapiv-en.html">
         <div class="card-top">
           <span class="card-abbr">SNAP-IV</span>
           <span class="card-age">6–18</span>
@@ -479,7 +479,7 @@
         <span class="card-name" data-en="Swanson, Nolan &amp; Pelham Rating Scale" data-es="Escala SNAP-IV">Swanson, Nolan &amp; Pelham Rating Scale</span>
       </a>
 
-      <a class="card" data-cat="adhd" href="asrs.html">
+      <a class="card" data-cat="adhd" data-tool="asrs" href="asrs-en.html">
         <div class="card-top">
           <span class="card-abbr">ASRS-5</span>
           <span class="card-age">≥18</span>
@@ -515,7 +515,7 @@
     </div>
     <div class="card-grid">
 
-      <a class="card" data-cat="universal" href="psc17.html">
+      <a class="card" data-cat="universal" data-tool="psc17" href="psc17-en.html">
         <div class="card-top">
           <span class="card-abbr">PSC-17</span>
           <span class="card-age">4–16</span>
@@ -535,7 +535,7 @@
     </div>
     <div class="card-grid">
 
-      <a class="card" data-cat="substance" href="crafft.html">
+      <a class="card" data-cat="substance" data-tool="crafft" href="crafft-en.html">
         <div class="card-top">
           <span class="card-abbr">CRAFFT 2.1</span>
           <span class="card-age">12–21</span>
@@ -543,7 +543,7 @@
         <span class="card-name" data-en="Substance Use Screening — Adolescents" data-es="Tamizaje de Uso de Sustancias — Adolescentes">Substance Use Screening — Adolescents</span>
       </a>
 
-      <a class="card" data-cat="substance" href="dast10.html">
+      <a class="card" data-cat="substance" data-tool="dast10" href="dast10-en.html">
         <div class="card-top">
           <span class="card-abbr">DAST-10</span>
           <span class="card-age">≥15</span>
@@ -625,10 +625,20 @@
     url.searchParams.set('lang', next);
     window.history.replaceState({}, '', url.toString());
     applyLang(next);
+    // Rewrite card hrefs to point to correct lang version
+    document.querySelectorAll('[data-tool]').forEach(function(card) {
+      var tool = card.getAttribute('data-tool');
+      if (tool) card.href = tool + '-' + next + '.html';
+    });
   };
 
   // Apply on load
   applyLang(currentLang);
+  // Init card hrefs based on current lang
+  document.querySelectorAll('[data-tool]').forEach(function(card) {
+    var tool = card.getAttribute('data-tool');
+    if (tool) card.href = tool + '-' + currentLang + '.html';
+  });
 })();
 </script>
 
@@ -845,7 +855,7 @@ function buildSendParts() {
     : (opt.getAttribute('data-en') || opt.text);
   var contact = (document.getElementById('sendContactInput').value || '').trim();
   var base  = window.location.href.replace(/[^\/]*$/, '');
-  var url   = base + qFile + '?shared=1&lang=' + _sendLang;
+  var url   = base + qFile.replace('.html', '-' + _sendLang + '.html') + '?shared=1';
 
   var bodyEN, bodyES;
   if (contact) {
