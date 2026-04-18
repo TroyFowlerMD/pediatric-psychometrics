@@ -1616,6 +1616,7 @@ function onPartBSelected(qNum, idx, total) {
   _crafftAnsweredIdxs.add(idx);
   updateScore();
   generateNote();
+  generateDetailedNote();
 
   var container = document.getElementById('partB-container');
   var allSections = Array.from(container.querySelectorAll('.question-section'));
@@ -1784,6 +1785,7 @@ function setLang(lang) {
   if (btnES) btnES.classList.toggle('active', !isEN);
   if (btnEN) btnEN.classList.toggle('active', isEN);
   if (typeof generateNote === 'function') generateNote();
+  if (typeof generateDetailedNote === 'function') generateDetailedNote();
   if (typeof updateScore === 'function') updateScore();
   if (typeof setLangPartial === 'function') setLangPartial(lang);
 }

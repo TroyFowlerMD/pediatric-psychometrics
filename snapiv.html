@@ -1584,13 +1584,14 @@ function _scrollToTop(el) {
 function _isFullyVisible(el) {
   var r = el.getBoundingClientRect();
   var tbH = _tbH();
-  // Suppress scroll if the question is at least partially on-screen above the fold
-  return r.top >= tbH && r.top < window.innerHeight;
+  // Only suppress scroll if the ENTIRE question is clearly visible on screen
+  return r.top >= tbH && r.bottom <= window.innerHeight;
 }
 function onAnswerSelected(qNum, idx) {
   _answeredQNums.add(qNum);
   updateScore();
   generateNote();
+  generateDetailedNote();
 
   var allSections = Array.from(document.querySelectorAll('.question-section'));
   var allAnswered = allSections.every(function(s) {
@@ -1760,6 +1761,7 @@ function setLang(lang) {
   if (btnES) btnES.classList.toggle('active', !isEN);
   if (btnEN) btnEN.classList.toggle('active', isEN);
   if (typeof generateNote === 'function') generateNote();
+  if (typeof generateDetailedNote === 'function') generateDetailedNote();
   if (typeof updateScore === 'function') updateScore();
   if (typeof setLangPartial === 'function') setLangPartial(lang);
 }
