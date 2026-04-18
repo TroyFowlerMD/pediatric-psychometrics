@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es" data-theme="dark" data-lang="es">
+<html lang="en" data-theme="dark" data-lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -1447,6 +1447,7 @@ a, button, [role='button'], input, select {
 <!-- TOP BAR -->
 <header class="top-bar">
   <div class="top-bar-left">
+    <a href="index.html" data-es="Herramientas Pediátricas" data-en="Pediatric Tools" style="color:var(--color-primary);text-decoration:none;font-size:var(--text-sm);font-weight:500;">← Pediatric Tools</a>
     <div class="tool-title-group">
       <span class="tool-title es-label">Escala de Vanderbilt — Padres</span>
       <span class="tool-title en-label">Vanderbilt Assessment Scale — Parent</span>
@@ -1456,8 +1457,8 @@ a, button, [role='button'], input, select {
   </div>
   <div class="top-bar-right">
     <div class="lang-toggle" role="group" aria-label="Idioma">
-      <button id="btn-es"   class="lang-btn active" aria-pressed="true">Español</button>
-      <button id="btn-en"   class="lang-btn" aria-pressed="false">English</button>
+      <button id="btn-es"   class="lang-btn" aria-pressed="false">Español</button>
+      <button id="btn-en"   class="lang-btn active" aria-pressed="true">English</button>
       <button id="theme-btn" class="icon-btn" aria-label="Cambiar tema" title="Cambiar tema" style="margin-left:4px;">
         <span id="theme-label">☀️</span>
       </button>
@@ -3135,7 +3136,7 @@ function adhdSubtype(pos_IN, pos_HI) {
 
 function renderScore() {
   const r = computeResults();
-  const lang = document.documentElement.getAttribute('data-lang') || 'es';
+  const lang = document.documentElement.getAttribute('data-lang') || 'en';
   const es = lang === 'es';
   const both = false; // EN mode shows EN labels only
 
@@ -3306,7 +3307,7 @@ document.getElementById('copy-btn').addEventListener('click', () => {
   const txt = document.getElementById('copy-text-content').textContent;
   navigator.clipboard.writeText(txt).then(() => {
     const btn = document.getElementById('copy-btn');
-    const lang = document.documentElement.getAttribute('data-lang') || 'es';
+    const lang = document.documentElement.getAttribute('data-lang') || 'en';
     btn.textContent = lang === 'en' ? 'Copied!' : '¡Copiado!';
     setTimeout(() => {
       btn.innerHTML = lang === 'en' ? 'Copy' : 'Copiar';
@@ -3317,7 +3318,7 @@ document.getElementById('copy-btn').addEventListener('click', () => {
 // ── Init ─────────────────────────────────────────────────────
 const savedTheme = 'dark';
 applyTheme(savedTheme);
-const urlLang = new URLSearchParams(location.search).get('lang') || 'es';
+const urlLang = new URLSearchParams(location.search).get('lang') || 'en';
 applyLang(urlLang);
 renderScore();
 // Update back link with current lang
