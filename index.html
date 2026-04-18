@@ -326,6 +326,38 @@
 .feedback-submit{align-self:flex-end;background:var(--teal,#4F98A3);color:#fff;border:none;border-radius:8px;padding:.55rem 1.4rem;font-size:.9rem;font-weight:600;cursor:pointer;transition:opacity .15s;}
 .feedback-submit:hover{opacity:.85;}
 .feedback-success{display:none;margin-top:.75rem;color:var(--teal,#4F98A3);font-size:.9rem;font-weight:500;}
+
+/* ── Send Card ── */
+.send-card{background:var(--surface-2,#1e1d1b);border:1.5px solid rgba(79,152,163,0.4);border-radius:14px;padding:16px 20px 18px;margin:0 0 28px;display:flex;align-items:flex-start;gap:14px;flex-wrap:wrap;}
+.send-card-icon{width:40px;height:40px;background:rgba(79,152,163,0.12);border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:1.2rem;}
+.send-card-body{flex:1;min-width:180px;}
+.send-card-title{font-size:.93rem;font-weight:700;color:var(--teal,#4F98A3);margin-bottom:3px;}
+.send-card-desc{font-size:.8rem;color:var(--muted,#78766e);margin-bottom:10px;line-height:1.45;}
+.send-card-btn{display:inline-flex;align-items:center;gap:7px;background:var(--teal,#4F98A3);color:#fff;font-size:.83rem;font-weight:700;padding:8px 16px;border-radius:8px;border:none;cursor:pointer;transition:opacity .15s;}
+.send-card-btn:hover{opacity:.85;}
+
+/* ── Send Modal ── */
+.send-modal-backdrop{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.72);z-index:9000;align-items:center;justify-content:center;padding:16px;}
+.send-modal-backdrop.open{display:flex;}
+.send-modal{background:var(--surface-2,#1e1d1b);border:1px solid rgba(79,152,163,0.4);border-radius:16px;padding:26px 26px 22px;width:100%;max-width:480px;max-height:90dvh;overflow-y:auto;position:relative;}
+.send-modal-title{font-size:.98rem;font-weight:700;color:var(--teal,#4F98A3);margin-bottom:3px;}
+.send-modal-subtitle{font-size:.78rem;color:var(--muted,#78766e);margin-bottom:18px;line-height:1.4;}
+.send-modal-close{position:absolute;top:14px;right:16px;background:none;border:none;color:var(--muted,#78766e);font-size:1.3rem;cursor:pointer;line-height:1;}
+.send-modal-close:hover{color:var(--text,#d0cfc9);}
+.send-field{margin-bottom:13px;}
+.send-label{display:block;font-size:.76rem;font-weight:600;color:var(--muted,#78766e);text-transform:uppercase;letter-spacing:.05em;margin-bottom:4px;}
+.send-input,.send-select{width:100%;background:var(--surface,#171614);border:1px solid var(--border,#2a2927);border-radius:8px;padding:9px 11px;color:var(--text,#d0cfc9);font-size:.86rem;font-family:inherit;box-sizing:border-box;transition:border-color .15s;}
+.send-input:focus,.send-select:focus{outline:none;border-color:var(--teal,#4F98A3);}
+.send-select option{background:#1e1d1b;}
+.send-lang-row{display:flex;gap:8px;}
+.send-lang-chip{padding:5px 14px;border-radius:20px;border:1px solid var(--border,#2a2927);background:transparent;color:var(--muted,#78766e);font-size:.8rem;font-weight:600;cursor:pointer;transition:all .15s;}
+.send-lang-chip.active{background:rgba(79,152,163,0.14);border-color:rgba(79,152,163,0.4);color:var(--teal,#4F98A3);}
+.send-modal-actions{display:flex;gap:8px;margin-top:18px;flex-wrap:wrap;}
+.send-generate-btn{flex:1;display:inline-flex;align-items:center;justify-content:center;gap:6px;background:var(--teal,#4F98A3);color:#fff;border:none;border-radius:8px;padding:10px 16px;font-size:.85rem;font-weight:700;cursor:pointer;transition:opacity .15s;}
+.send-generate-btn:hover{opacity:.85;}
+.send-msg-box{background:var(--surface,#171614);border:1px solid var(--border,#2a2927);border-radius:8px;padding:11px 11px 36px;font-size:.77rem;font-family:inherit;color:var(--text,#d0cfc9);white-space:pre-wrap;word-break:break-word;line-height:1.55;margin:0;min-height:80px;position:relative;}
+.send-msg-copy-btn{position:absolute;bottom:7px;right:7px;display:inline-flex;align-items:center;gap:5px;background:var(--teal,#4F98A3);color:#fff;border:none;border-radius:6px;padding:4px 11px;font-size:.73rem;font-weight:600;cursor:pointer;transition:opacity .15s;}
+.send-msg-copy-btn:hover{opacity:.85;}
 </style>
 </head>
 <body>
@@ -522,6 +554,20 @@
     </div>
   </section>
 
+
+<!-- ── Send Questionnaire Card ── -->
+<div class="send-card" id="sendCard">
+  <div class="send-card-icon">✉️</div>
+  <div class="send-card-body">
+    <div class="send-card-title" id="sendCardTitle">Send a Questionnaire</div>
+    <div class="send-card-desc" id="sendCardDesc">Generate a link to share by email, text, or any channel. The recipient completes the questionnaire on their device and copies the results back to you.</div>
+    <button class="send-card-btn" onclick="openSendModal()">
+      <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,12 2,6"/></svg>
+      <span id="sendCardBtnLabel">Send Questionnaire</span>
+    </button>
+  </div>
+</div>
+
 </main>
 
 <!-- FOOTER -->
@@ -693,6 +739,214 @@ function submitFeedback(e) {
     if (btn) btn.disabled = false;
   });
 }
+</script>
+
+
+<!-- ── Send Modal ── -->
+<div class="send-modal-backdrop" id="sendModalBackdrop" onclick="closeSendModalOutside(event)">
+  <div class="send-modal" role="dialog" aria-modal="true">
+    <button class="send-modal-close" onclick="closeSendModal()" aria-label="Close">&times;</button>
+    <div class="send-modal-title" id="sendModalTitle">Send Questionnaire</div>
+    <div class="send-modal-subtitle" id="sendModalSubtitle">Fill in the fields to generate a message. Share it by email, text, or any other channel.</div>
+
+    <div class="send-field">
+      <label class="send-label" id="sendQLbl" for="sendQSelect">Questionnaire</label>
+      <select class="send-select" id="sendQSelect" onchange="updateSendMsg()">
+        <optgroup label="Depression / Depresión" data-en-label="Depression" data-es-label="Depresión">
+          <option value="smfq.html" data-en="SMFQ-C — Child (Depression ≤11)" data-es="SMFQ-C — Niño/a (Depresión ≤11)">SMFQ-C — Child (Depression ≤11)</option>
+          <option value="mfq-parent.html" data-en="SMFQ-P — Parent (Depression 6–17)" data-es="SMFQ-P — Padres (Depresión 6–17)">SMFQ-P — Parent (Depression 6–17)</option>
+          <option value="phqa.html" data-en="PHQ-A — Adolescent (Depression ≥12)" data-es="PHQ-A — Adolescente (Depresión ≥12)">PHQ-A — Adolescent (Depression ≥12)</option>
+        </optgroup>
+        <optgroup label="Anxiety / Ansiedad" data-en-label="Anxiety" data-es-label="Ansiedad">
+          <option value="scared.html" data-en="SCARED-C — Child (Anxiety 8–18)" data-es="SCARED-C — Niño/a (Ansiedad 8–18)">SCARED-C — Child (Anxiety 8–18)</option>
+          <option value="scared-parent.html" data-en="SCARED-P — Parent (Anxiety 8–18)" data-es="SCARED-P — Padres (Ansiedad 8–18)">SCARED-P — Parent (Anxiety 8–18)</option>
+          <option value="gad7.html" data-en="GAD-7 (Anxiety ≥12)" data-es="GAD-7 (Ansiedad ≥12)">GAD-7 (Anxiety ≥12)</option>
+        </optgroup>
+        <optgroup label="ADHD / TDAH" data-en-label="ADHD" data-es-label="TDAH">
+          <option value="cap.html" data-en="CAP Scale (ADHD ≤11, teacher)" data-es="Escala CAP (TDAH ≤11, maestro/a)">CAP Scale (ADHD ≤11, teacher)</option>
+          <option value="snapiv.html" data-en="SNAP-IV (ADHD/ODD)" data-es="SNAP-IV (TDAH/TND)">SNAP-IV (ADHD/ODD)</option>
+          <option value="asrs.html" data-en="ASRS-5 (Adult ADHD ≥18)" data-es="ASRS-5 (TDAH Adulto ≥18)">ASRS-5 (Adult ADHD ≥18)</option>
+          <option value="vanderbilt-parent.html" data-en="Vanderbilt — Parent (ADHD 6–12)" data-es="Vanderbilt — Padres (TDAH 6–12)">Vanderbilt — Parent (ADHD 6–12)</option>
+          <option value="vanderbilt-teacher.html" data-en="Vanderbilt — Teacher (ADHD 6–12)" data-es="Vanderbilt — Maestros (TDAH 6–12)">Vanderbilt — Teacher (ADHD 6–12)</option>
+        </optgroup>
+        <optgroup label="Universal Screening / Tamizaje Universal" data-en-label="Universal Screening" data-es-label="Tamizaje Universal">
+          <option value="psc17.html" data-en="PSC-17 (Universal Screening 4–16)" data-es="PSC-17 (Tamizaje Universal 4–16)">PSC-17 (Universal Screening 4–16)</option>
+        </optgroup>
+        <optgroup label="Substance Use / Uso de Sustancias" data-en-label="Substance Use" data-es-label="Uso de Sustancias">
+          <option value="crafft.html" data-en="CRAFFT 2.1 (Substance Use 12–21)" data-es="CRAFFT 2.1 (Uso de Sustancias 12–21)">CRAFFT 2.1 (Substance Use 12–21)</option>
+          <option value="dast10.html" data-en="DAST-10 (Drug Abuse ≥15)" data-es="DAST-10 (Abuso de Drogas ≥15)">DAST-10 (Drug Abuse ≥15)</option>
+        </optgroup>
+      </select>
+    </div>
+
+    <div class="send-field">
+      <label class="send-label" id="sendContactLbl" for="sendContactInput">Recipient contact (email, phone, etc.) — optional</label>
+      <input class="send-input" id="sendContactInput" type="text" placeholder="email@example.com or +1 555-000-0000" oninput="updateSendMsg()" autocomplete="off">
+    </div>
+
+    <div class="send-field">
+      <label class="send-label" id="sendLangLbl">Questionnaire Language</label>
+      <div class="send-lang-row">
+        <button class="send-lang-chip active" id="sendLangEN" onclick="setSendLang('en')">English</button>
+        <button class="send-lang-chip" id="sendLangES" onclick="setSendLang('es')">Español</button>
+      </div>
+    </div>
+
+    <div class="send-modal-actions">
+      <button class="send-generate-btn" onclick="openMailtoLink()">
+        <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,12 2,6"/></svg>
+        <span id="openMailtoLabel">Open in Email App</span>
+      </button>
+    </div>
+
+    <div style="margin-top:16px;border-top:1px solid var(--border,#2a2927);padding-top:14px;">
+      <div style="font-size:.73rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--muted,#78766e);margin-bottom:6px;" id="copyMsgLbl">Or copy the message below</div>
+      <div style="position:relative;">
+        <pre class="send-msg-box" id="sendMsgBox"></pre>
+        <button class="send-msg-copy-btn" id="sendMsgCopyBtn" onclick="copySendMsg()">
+          <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+          <span id="copySendMsgLabel">Copy</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<script>
+// ── Send Modal ──────────────────────────────────────────────
+var _sendLang = 'en';
+
+function openSendModal() {
+  var dashLang = document.documentElement.getAttribute('data-lang') || 'en';
+  setSendLang(dashLang);
+  document.getElementById('sendModalBackdrop').classList.add('open');
+  updateSendMsg();
+}
+function closeSendModal() {
+  document.getElementById('sendModalBackdrop').classList.remove('open');
+}
+function closeSendModalOutside(e) {
+  if (e.target === document.getElementById('sendModalBackdrop')) closeSendModal();
+}
+function setSendLang(lang) {
+  _sendLang = lang;
+  document.getElementById('sendLangEN').classList.toggle('active', lang === 'en');
+  document.getElementById('sendLangES').classList.toggle('active', lang === 'es');
+  updateSendMsg();
+}
+
+function buildSendParts() {
+  var sel    = document.getElementById('sendQSelect');
+  var qFile  = sel.value;
+  var opt    = sel.selectedOptions[0];
+  var qName  = _sendLang === 'es'
+    ? (opt.getAttribute('data-es') || opt.text)
+    : (opt.getAttribute('data-en') || opt.text);
+  var contact = (document.getElementById('sendContactInput').value || '').trim();
+  var base  = window.location.href.replace(/[^\/]*$/, '');
+  var url   = base + qFile + '?shared=1&lang=' + _sendLang;
+
+  var bodyEN, bodyES;
+  if (contact) {
+    bodyEN = 'Hello,\n\nI would like you to complete the following questionnaire.\n\nQuestionnaire: ' + qName + '\nLink: ' + url + '\n\nOnce finished, please copy your Detailed View results and send them back to me at: ' + contact + '\n\nThank you.';
+    bodyES = 'Estimado/a,\n\nLe solicito que complete el siguiente cuestionario.\n\nCuestionario: ' + qName + '\nEnlace: ' + url + '\n\nUna vez finalizado, por favor copie los resultados de la Vista Detallada y envíelos de regreso a: ' + contact + '\n\nGracias.';
+  } else {
+    bodyEN = 'Hello,\n\nI would like you to complete the following questionnaire.\n\nQuestionnaire: ' + qName + '\nLink: ' + url + '\n\nOnce finished, please copy your Detailed View results and save them to share at your next visit.\n\nThank you.';
+    bodyES = 'Estimado/a,\n\nLe solicito que complete el siguiente cuestionario.\n\nCuestionario: ' + qName + '\nEnlace: ' + url + '\n\nUna vez finalizado, por favor copie los resultados de la Vista Detallada y guárdelos para compartir en su próxima visita.\n\nGracias.';
+  }
+
+  var subjEN = 'Questionnaire to complete — ' + qName;
+  var subjES = 'Cuestionario para completar — ' + qName;
+
+  return {
+    body:    _sendLang === 'es' ? bodyES : bodyEN,
+    subject: _sendLang === 'es' ? subjES : subjEN,
+    contact: contact
+  };
+}
+
+function updateSendMsg() {
+  var p = buildSendParts();
+  var box = document.getElementById('sendMsgBox');
+  if (box) box.textContent = p.body;
+  applySendModalLang(_sendLang);
+}
+
+function openMailtoLink() {
+  var p = buildSendParts();
+  var mailto = 'mailto:' + encodeURIComponent(p.contact) +
+    '?subject=' + encodeURIComponent(p.subject) +
+    '&body='    + encodeURIComponent(p.body);
+  window.location.href = mailto;
+}
+
+function copySendMsg() {
+  var box = document.getElementById('sendMsgBox');
+  if (!box) return;
+  navigator.clipboard.writeText(box.textContent).then(function() {
+    var btn = document.getElementById('copySendMsgLabel');
+    if (btn) {
+      btn.textContent = _sendLang === 'es' ? '¡Copiado!' : 'Copied!';
+      setTimeout(function() { btn.textContent = _sendLang === 'es' ? 'Copiar' : 'Copy'; }, 2200);
+    }
+  }).catch(function(){});
+}
+
+function applySendModalLang(lang) {
+  var isEN = lang !== 'es';
+  var map = {
+    'sendCardTitle':    ['Send a Questionnaire',        'Enviar cuestionario'],
+    'sendCardDesc':     ['Generate a link to share by email, text, or any channel. The recipient completes the questionnaire on their device and copies the results back to you.',
+                         'Genere un enlace para compartir por correo, mensaje u otro medio. El destinatario completa el cuestionario en su dispositivo y le devuelve los resultados.'],
+    'sendCardBtnLabel': ['Send Questionnaire',           'Enviar cuestionario'],
+    'sendModalTitle':   ['Send Questionnaire',           'Enviar cuestionario'],
+    'sendModalSubtitle':['Fill in the fields to generate a message. Share it by email, text, or any other channel.',
+                         'Complete los campos para generar el mensaje. Compártalo por correo, mensaje u otro medio.'],
+    'sendQLbl':         ['Questionnaire',                'Cuestionario'],
+    'sendContactLbl':   ['Recipient contact (email, phone, etc.) — optional', 'Contacto del destinatario (correo o teléfono) — opcional'],
+    'sendLangLbl':      ['Questionnaire Language',       'Idioma del cuestionario'],
+    'openMailtoLabel':  ['Open in Email App',            'Abrir en app de correo'],
+    'copyMsgLbl':       ['Or copy the message below',   'O copie el mensaje a continuación'],
+    'copySendMsgLabel': ['Copy',                         'Copiar'],
+  };
+  Object.entries(map).forEach(function(e) {
+    var el = document.getElementById(e[0]);
+    if (el) el.textContent = isEN ? e[1][0] : e[1][1];
+  });
+  var ci = document.getElementById('sendContactInput');
+  if (ci) ci.placeholder = isEN ? 'email@example.com or +1 555-000-0000' : 'correo@ejemplo.com o +504 9999-9999';
+  // Also update select option text
+  var sel = document.getElementById('sendQSelect');
+  if (sel) {
+    Array.from(sel.options).forEach(function(opt) {
+      var txt = isEN ? opt.getAttribute('data-en') : opt.getAttribute('data-es');
+      if (txt) opt.text = txt;
+    });
+    Array.from(sel.querySelectorAll('optgroup')).forEach(function(og) {
+      var lbl = og.getAttribute('data-en-label') && og.getAttribute('data-es-label')
+        ? (isEN ? og.getAttribute('data-en-label') : og.getAttribute('data-es-label'))
+        : og.label;
+      og.label = lbl;
+    });
+  }
+}
+
+// Hook into existing setLang
+(function() {
+  var _orig = window.setLang;
+  window.setLang = function(lang) {
+    if (_orig) _orig(lang);
+    setSendLang(lang);
+    applySendModalLang(lang);
+  };
+  document.addEventListener('DOMContentLoaded', function() {
+    var lang = new URLSearchParams(location.search).get('lang') ||
+               document.documentElement.getAttribute('data-lang') || 'en';
+    applySendModalLang(lang);
+    updateSendMsg();
+  });
+})();
 </script>
 
 </body>
