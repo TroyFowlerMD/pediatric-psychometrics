@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pediatric Screening & Monitoring Tools — CoCM Camasca</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --teal: #4F98A3;
+    --teal-dim: rgba(79,152,163,0.14);
+    --teal-border: rgba(79,152,163,0.4);
+    --gold: #c89b3c;
+    --gold-dim: rgba(200,155,60,0.12);
+    --gold-border: rgba(200,155,60,0.5);
+    --surface: #171614;
+    --surface-2: #1e1d1b;
+    --border: #2a2927;
+    --text: #d0cfc9;
+    --muted: #78766e;
+    --bg: #0e0d0c;
+
+    /* Category accents */
+    --cat-depression: #4F98A3;
+    --cat-depression-dim: rgba(79,152,163,0.13);
+    --cat-depression-border: rgba(79,152,163,0.35);
+
+    --cat-anxiety: #c89b3c;
+    --cat-anxiety-dim: rgba(200,155,60,0.12);
+    --cat-anxiety-border: rgba(200,155,60,0.4);
+
+    --cat-adhd: #8b6fc4;
+    --cat-adhd-dim: rgba(139,111,196,0.13);
+    --cat-adhd-border: rgba(139,111,196,0.4);
+
+    --cat-universal: #d07060;
+    --cat-universal-dim: rgba(208,112,96,0.13);
+    --cat-universal-border: rgba(208,112,96,0.4);
+
+    --cat-substance: #c47a2c;
+    --cat-substance-dim: rgba(196,122,44,0.13);
+    --cat-substance-border: rgba(196,122,44,0.4);
+
+    --radius: 8px;
+    --radius-sm: 5px;
+    --font: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  }
+
+  html { font-family: var(--font); background: var(--bg); color: var(--text); font-size: 14px; -webkit-font-smoothing: antialiased; }
+
+  body { min-height: 100vh; display: flex; flex-direction: column; }
+
+  /* ── TOPBAR ── */
+  .topbar {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 0 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    min-height: 56px;
+  }
+
+  .topbar-left { display: flex; flex-direction: column; gap: 1px; min-width: 0; }
+
+  .topbar-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--text);
+    letter-spacing: -0.01em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 1.25;
+  }
+
+  .topbar-subtitle {
+    font-size: 11px;
+    color: var(--muted);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 1.2;
+  }
+
+  .lang-btn {
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 0 12px;
+    height: 34px;
+    min-width: 44px;
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    color: var(--text);
+    font-family: var(--font);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    cursor: pointer;
+    transition: border-color 0.15s, color 0.15s, background 0.15s;
+    text-transform: uppercase;
+  }
+
+  .lang-btn:hover {
+    border-color: var(--teal-border);
+    color: var(--teal);
+    background: var(--teal-dim);
+  }
+
+  .lang-btn svg { width: 13px; height: 13px; flex-shrink: 0; }
+
+  /* ── MAIN ── */
+  main {
+    flex: 1;
+    padding: 18px 16px 12px;
+    max-width: 1400px;
+    width: 100%;
+    margin: 0 auto;
+  }
+
+  /* ── CATEGORY SECTIONS ── */
+  .category { margin-bottom: 20px; }
+
+  .category-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 10px;
+  }
+
+  .category-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .category-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .category-divider {
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* ── GRID ── */
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+  }
+
+  @media (max-width: 1100px) {
+    .card-grid { grid-template-columns: repeat(3, 1fr); }
+  }
+
+  @media (max-width: 720px) {
+    .card-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  @media (max-width: 440px) {
+    .card-grid { grid-template-columns: 1fr; }
+  }
+
+  /* ── CARDS ── */
+  .card {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding: 10px 12px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    text-decoration: none;
+    color: var(--text);
+    cursor: pointer;
+    transition: border-color 0.15s, background 0.15s, transform 0.12s;
+    min-height: 44px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    opacity: 0;
+    transition: opacity 0.15s;
+  }
+
+  .card:hover {
+    transform: translateY(-1px);
+    border-color: var(--card-border);
+    background: var(--card-dim);
+  }
+
+  .card:hover::before { opacity: 1; }
+
+  .card:active { transform: translateY(0); }
+
+  /* Category color theming via inline custom props */
+  .card[data-cat="depression"] {
+    --card-accent: var(--cat-depression);
+    --card-dim: var(--cat-depression-dim);
+    --card-border: var(--cat-depression-border);
+  }
+  .card[data-cat="depression"]::before { background: var(--cat-depression); }
+
+  .card[data-cat="anxiety"] {
+    --card-accent: var(--cat-anxiety);
+    --card-dim: var(--cat-anxiety-dim);
+    --card-border: var(--cat-anxiety-border);
+  }
+  .card[data-cat="anxiety"]::before { background: var(--cat-anxiety); }
+
+  .card[data-cat="adhd"] {
+    --card-accent: var(--cat-adhd);
+    --card-dim: var(--cat-adhd-dim);
+    --card-border: var(--cat-adhd-border);
+  }
+  .card[data-cat="adhd"]::before { background: var(--cat-adhd); }
+
+  .card[data-cat="universal"] {
+    --card-accent: var(--cat-universal);
+    --card-dim: var(--cat-universal-dim);
+    --card-border: var(--cat-universal-border);
+  }
+  .card[data-cat="universal"]::before { background: var(--cat-universal); }
+
+  .card[data-cat="substance"] {
+    --card-accent: var(--cat-substance);
+    --card-dim: var(--cat-substance-dim);
+    --card-border: var(--cat-substance-border);
+  }
+  .card[data-cat="substance"]::before { background: var(--cat-substance); }
+
+  /* Card internals */
+  .card-top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 6px;
+  }
+
+  .card-abbr {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--card-accent);
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+  }
+
+  .card-age {
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    padding: 1px 6px;
+    border-radius: 99px;
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    font-size: 9.5px;
+    font-weight: 600;
+    color: var(--muted);
+    letter-spacing: 0.02em;
+    white-space: nowrap;
+    margin-top: 1px;
+  }
+
+  .card-name {
+    font-size: 11.5px;
+    color: var(--text);
+    line-height: 1.35;
+    font-weight: 400;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 12px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+
+  .footer-text {
+    font-size: 11px;
+    color: var(--muted);
+  }
+
+  .footer-link {
+    font-size: 11px;
+    color: var(--muted);
+    text-decoration: none;
+    border-bottom: 1px solid var(--border);
+    transition: color 0.15s, border-color 0.15s;
+  }
+
+  .footer-link:hover { color: var(--teal); border-color: var(--teal-border); }
+</style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<header class="topbar" role="banner">
+  <div class="topbar-left">
+    <span class="topbar-title" id="title-main">Pediatric Screening &amp; Monitoring Tools</span>
+    <span class="topbar-subtitle" id="title-sub">CoCM Camasca — Bilingual Clinical Instruments</span>
+  </div>
+  <button class="lang-btn" id="lang-toggle" aria-label="Switch language" onclick="toggleLang()">
+    <svg viewBox="0 0 14 14" fill="none" aria-hidden="true">
+      <circle cx="7" cy="7" r="6" stroke="currentColor" stroke-width="1.2"/>
+      <path d="M7 1C7 1 5 4 5 7s2 6 2 6" stroke="currentColor" stroke-width="1.2"/>
+      <path d="M7 1C7 1 9 4 9 7s-2 6-2 6" stroke="currentColor" stroke-width="1.2"/>
+      <path d="M1.5 7h11" stroke="currentColor" stroke-width="1.2"/>
+    </svg>
+    <span id="lang-label">ES</span>
+  </button>
+</header>
+
+<!-- MAIN -->
+<main role="main">
+
+  <!-- DEPRESSION -->
+  <section class="category" aria-labelledby="cat-depression">
+    <div class="category-header">
+      <div class="category-dot" style="background:var(--cat-depression)"></div>
+      <span class="category-label" id="cat-depression" data-en="Depression" data-es="Depresión">Depression</span>
+      <div class="category-divider"></div>
+    </div>
+    <div class="card-grid">
+
+      <a class="card" data-cat="depression" href="smfq.html">
+        <div class="card-top">
+          <span class="card-abbr">SMFQ-C</span>
+          <span class="card-age">≤11</span>
+        </div>
+        <span class="card-name" data-en="Short Mood &amp; Feelings Questionnaire — Child" data-es="Cuestionario Corto de Estado de Ánimo — Niño/a">Short Mood &amp; Feelings Questionnaire — Child</span>
+      </a>
+
+      <a class="card" data-cat="depression" href="mfq-parent.html">
+        <div class="card-top">
+          <span class="card-abbr">SMFQ-P</span>
+          <span class="card-age">6–17</span>
+        </div>
+        <span class="card-name" data-en="Short Mood &amp; Feelings Questionnaire — Parent" data-es="Cuestionario Corto de Estado de Ánimo — Padres">Short Mood &amp; Feelings Questionnaire — Parent</span>
+      </a>
+
+      <a class="card" data-cat="depression" href="phqa.html">
+        <div class="card-top">
+          <span class="card-abbr">PHQ-A</span>
+          <span class="card-age">≥12</span>
+        </div>
+        <span class="card-name" data-en="Patient Health Questionnaire — Adolescent" data-es="Cuestionario de Salud del Paciente — Adolescente">Patient Health Questionnaire — Adolescent</span>
+      </a>
+
+    </div>
+  </section>
+
+  <!-- ANXIETY -->
+  <section class="category" aria-labelledby="cat-anxiety">
+    <div class="category-header">
+      <div class="category-dot" style="background:var(--cat-anxiety)"></div>
+      <span class="category-label" id="cat-anxiety" data-en="Anxiety" data-es="Ansiedad">Anxiety</span>
+      <div class="category-divider"></div>
+    </div>
+    <div class="card-grid">
+
+      <a class="card" data-cat="anxiety" href="scared.html">
+        <div class="card-top">
+          <span class="card-abbr">SCARED-C</span>
+          <span class="card-age">8–18</span>
+        </div>
+        <span class="card-name" data-en="Screen for Child Anxiety — Child" data-es="Tamizaje de Ansiedad Infantil — Niño/a">Screen for Child Anxiety — Child</span>
+      </a>
+
+      <a class="card" data-cat="anxiety" href="scared-parent.html">
+        <div class="card-top">
+          <span class="card-abbr">SCARED-P</span>
+          <span class="card-age">8–18</span>
+        </div>
+        <span class="card-name" data-en="Screen for Child Anxiety — Parent" data-es="Tamizaje de Ansiedad Infantil — Padres">Screen for Child Anxiety — Parent</span>
+      </a>
+
+      <a class="card" data-cat="anxiety" href="gad7.html">
+        <div class="card-top">
+          <span class="card-abbr">GAD-7</span>
+          <span class="card-age">≥12</span>
+        </div>
+        <span class="card-name" data-en="Generalized Anxiety Disorder — 7" data-es="Trastorno de Ansiedad Generalizada — 7">Generalized Anxiety Disorder — 7</span>
+      </a>
+
+    </div>
+  </section>
+
+  <!-- ADHD -->
+  <section class="category" aria-labelledby="cat-adhd">
+    <div class="category-header">
+      <div class="category-dot" style="background:var(--cat-adhd)"></div>
+      <span class="category-label" id="cat-adhd" data-en="ADHD" data-es="TDAH">ADHD</span>
+      <div class="category-divider"></div>
+    </div>
+    <div class="card-grid">
+
+      <a class="card" data-cat="adhd" href="cap.html">
+        <div class="card-top">
+          <span class="card-abbr">CAP Scale</span>
+          <span class="card-age">≤11, teacher</span>
+        </div>
+        <span class="card-name" data-en="Children's Attention Problems" data-es="Escala CAP — Problemas de Atención Infantil">Children's Attention Problems</span>
+      </a>
+
+      <a class="card" data-cat="adhd" href="snapiv.html">
+        <div class="card-top">
+          <span class="card-abbr">SNAP-IV</span>
+          <span class="card-age">6–18</span>
+        </div>
+        <span class="card-name" data-en="Swanson, Nolan &amp; Pelham Rating Scale" data-es="Escala SNAP-IV">Swanson, Nolan &amp; Pelham Rating Scale</span>
+      </a>
+
+      <a class="card" data-cat="adhd" href="asrs.html">
+        <div class="card-top">
+          <span class="card-abbr">ASRS-5</span>
+          <span class="card-age">≥18</span>
+        </div>
+        <span class="card-name" data-en="Adult ADHD Self-Report Scale" data-es="Escala de Autoinforme TDAH Adulto">Adult ADHD Self-Report Scale</span>
+      </a>
+
+      <a class="card" data-cat="adhd" href="vanderbilt-parent.html">
+        <div class="card-top">
+          <span class="card-abbr">Vanderbilt-P</span>
+          <span class="card-age">6–12</span>
+        </div>
+        <span class="card-name" data-en="Vanderbilt — Parent" data-es="Vanderbilt — Padres">Vanderbilt — Parent</span>
+      </a>
+
+      <a class="card" data-cat="adhd" href="vanderbilt-teacher.html">
+        <div class="card-top">
+          <span class="card-abbr">Vanderbilt-T</span>
+          <span class="card-age">6–12</span>
+        </div>
+        <span class="card-name" data-en="Vanderbilt — Teacher" data-es="Vanderbilt — Maestros">Vanderbilt — Teacher</span>
+      </a>
+
+    </div>
+  </section>
+
+  <!-- UNIVERSAL SCREENING -->
+  <section class="category" aria-labelledby="cat-universal">
+    <div class="category-header">
+      <div class="category-dot" style="background:var(--cat-universal)"></div>
+      <span class="category-label" id="cat-universal" data-en="Universal Screening" data-es="Tamizaje Universal">Universal Screening</span>
+      <div class="category-divider"></div>
+    </div>
+    <div class="card-grid">
+
+      <a class="card" data-cat="universal" href="psc17.html">
+        <div class="card-top">
+          <span class="card-abbr">PSC-17</span>
+          <span class="card-age">4–16</span>
+        </div>
+        <span class="card-name" data-en="Pediatric Symptom Checklist" data-es="Lista de Verificación de Síntomas Pediátricos">Pediatric Symptom Checklist</span>
+      </a>
+
+    </div>
+  </section>
+
+  <!-- SUBSTANCE USE -->
+  <section class="category" aria-labelledby="cat-substance">
+    <div class="category-header">
+      <div class="category-dot" style="background:var(--cat-substance)"></div>
+      <span class="category-label" id="cat-substance" data-en="Substance Use" data-es="Uso de Sustancias">Substance Use</span>
+      <div class="category-divider"></div>
+    </div>
+    <div class="card-grid">
+
+      <a class="card" data-cat="substance" href="crafft.html">
+        <div class="card-top">
+          <span class="card-abbr">CRAFFT 2.1</span>
+          <span class="card-age">12–21</span>
+        </div>
+        <span class="card-name" data-en="Substance Use Screening — Adolescents" data-es="Tamizaje de Uso de Sustancias — Adolescentes">Substance Use Screening — Adolescents</span>
+      </a>
+
+      <a class="card" data-cat="substance" href="dast10.html">
+        <div class="card-top">
+          <span class="card-abbr">DAST-10</span>
+          <span class="card-age">≥15</span>
+        </div>
+        <span class="card-name" data-en="Drug Abuse Screening Test" data-es="Prueba de Detección de Abuso de Drogas">Drug Abuse Screening Test</span>
+      </a>
+
+    </div>
+  </section>
+
+</main>
+
+<!-- FOOTER -->
+<footer role="contentinfo">
+  <span class="footer-text">CoCM Camasca — Powered by TroyMD</span>
+  <span class="footer-text">·</span>
+  <a class="footer-link" href="https://troyfowlermd.github.io" target="_blank" rel="noopener">troyfowlermd.github.io</a>
+</footer>
+
+<script>
+(function () {
+  // ── i18n data ──
+  var strings = {
+    en: {
+      titleMain: 'Pediatric Screening \u0026 Monitoring Tools',
+      titleSub: 'CoCM Camasca \u2014 Bilingual Clinical Instruments',
+      langLabel: 'ES'
+    },
+    es: {
+      titleMain: 'Herramientas de Tamizaje y Monitoreo Pedi\u00e1trico',
+      titleSub: 'CoCM Camasca \u2014 Instrumentos Cl\u00ednicos Biling\u00fces',
+      langLabel: 'EN'
+    }
+  };
+
+  // ── Determine initial lang from URL param ──
+  function getLangFromURL() {
+    var p = new URLSearchParams(window.location.search).get('lang');
+    return (p === 'es') ? 'es' : 'en';
+  }
+
+  var currentLang = getLangFromURL();
+
+  function applyLang(lang) {
+    currentLang = lang;
+    var s = strings[lang];
+
+    document.documentElement.lang = lang;
+    document.getElementById('title-main').textContent = s.titleMain;
+    document.getElementById('title-sub').textContent = s.titleSub;
+    document.getElementById('lang-label').textContent = s.langLabel;
+
+    // Update all elements with data-en / data-es
+    var all = document.querySelectorAll('[data-en]');
+    for (var i = 0; i < all.length; i++) {
+      var el = all[i];
+      var val = el.getAttribute('data-' + lang);
+      if (val !== null) el.innerHTML = val;
+    }
+  }
+
+  window.toggleLang = function () {
+    var next = (currentLang === 'en') ? 'es' : 'en';
+    var url = new URL(window.location.href);
+    url.searchParams.set('lang', next);
+    window.history.replaceState({}, '', url.toString());
+    applyLang(next);
+  };
+
+  // Apply on load
+  applyLang(currentLang);
+})();
+</script>
+</body>
+</html>
