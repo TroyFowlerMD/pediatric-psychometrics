@@ -1316,31 +1316,27 @@ a, button, [role='button'], input, select {
 .feedback-submit:hover{opacity:.85;}
 .feedback-success{display:none;margin-top:.75rem;color:var(--color-primary,#4F98A3);font-size:.9rem;font-weight:500;}
 
-/* ── Results Panels (Detailed + Simple) ── */
-.results-dual-container{margin-top:.75rem;}
-.result-view-block{background:var(--color-surface);border:1px solid var(--color-border);border-radius:10px;padding:1rem 1.1rem;margin-bottom:.75rem;}
-.result-view-label{font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--color-primary);margin-bottom:.6rem;}
-.result-view-text{font-size:.88rem;color:var(--color-text);white-space:pre-wrap;line-height:1.65;font-family:inherit;}
-.result-view-copy-btn{margin-top:.6rem;background:transparent;border:1px solid var(--color-border);border-radius:8px;padding:.38rem .85rem;font-size:.82rem;color:var(--color-text-muted);cursor:pointer;transition:all .15s;display:inline-flex;align-items:center;gap:.4rem;}
-.result-view-copy-btn:hover{border-color:var(--color-primary);color:var(--color-primary);}
-.copy-flash{font-size:.8rem;color:var(--color-primary);margin-left:.5rem;opacity:0;transition:opacity .3s;}
+/* ── Dual Results + Print ── */
+.results-dual-container{margin-top:.5rem;}
+.result-view-block{background:var(--color-surface,#1c1b19);border:1px solid var(--color-border,#393836);border-radius:10px;padding:.9rem 1rem;margin-bottom:.65rem;}
+.result-view-label{font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--color-primary,#4f98a3);margin-bottom:.5rem;}
+.result-view-text{font-size:.86rem;color:var(--color-text,#cdccca);white-space:pre-wrap;line-height:1.65;font-family:inherit;min-height:1.5rem;}
+.result-view-copy-btn{margin-top:.55rem;background:transparent;border:1px solid var(--color-border,#393836);border-radius:8px;padding:.35rem .8rem;font-size:.8rem;color:var(--color-text-muted,#797876);cursor:pointer;transition:all .15s;display:inline-flex;align-items:center;gap:.4rem;}
+.result-view-copy-btn:hover{border-color:var(--color-primary,#4f98a3);color:var(--color-primary,#4f98a3);}
+.copy-flash{font-size:.78rem;color:var(--color-primary,#4f98a3);margin-left:.3rem;opacity:0;transition:opacity .25s;}
 .copy-flash.show{opacity:1;}
-
-/* ── Print / PDF buttons ── */
-.print-pdf-row{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:.5rem;}
-.btn-print{display:inline-flex;align-items:center;gap:.4rem;background:transparent;border:1px solid var(--color-border);border-radius:8px;padding:.45rem 1rem;font-size:.85rem;font-weight:500;color:var(--color-text-muted);cursor:pointer;transition:all .15s;}
-.btn-print:hover:not(:disabled){border-color:var(--color-primary);color:var(--color-primary);}
-.btn-print:disabled{opacity:.35;cursor:not-allowed;}
-
-/* ── Print stylesheet ── */
+.print-pdf-row{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:.25rem;}
+.btn-print{display:inline-flex;align-items:center;gap:.4rem;background:transparent;border:1px solid var(--color-border,#393836);border-radius:8px;padding:.42rem .95rem;font-size:.83rem;font-weight:500;color:var(--color-text-muted,#797876);cursor:pointer;transition:all .15s;}
+.btn-print:hover:not(:disabled){border-color:var(--color-primary,#4f98a3);color:var(--color-primary,#4f98a3);}
+.btn-print:disabled{opacity:.32;cursor:not-allowed;}
 @media print{
-  .topbar,.top-bar,.print-pdf-row,.score-actions,.result-view-copy-btn,.feedback-box,button,.lang-toggle,.reset-btn,.copy-btn{display:none!important;}
-  .score-panel,.result-view-block,.results-dual-container{box-shadow:none!important;border:1px solid #ccc!important;}
+  .topbar,.top-bar,.top-bar-right,.print-pdf-row,.score-actions,.result-view-copy-btn,
+  .feedback-box,button:not([type="radio"]),.lang-toggle,.reset-btn,.copy-btn,
+  .send-card,.send-modal-backdrop{display:none!important;}
   body{background:#fff!important;color:#000!important;}
-  .result-view-text{color:#000!important;}
+  .result-view-text,.note-summary-box{color:#000!important;}
+  .result-view-block,.results-dual-container{border:1px solid #ccc!important;box-shadow:none!important;}
 }
-
-/* ── Hide feedback on ?shared=1 ── */
 .shared-hide{display:none!important;}
 </style>
   
@@ -1401,7 +1397,8 @@ a, button, [role='button'], input, select {
 
     <form id="toolform" novalidate>
       <div id="questions-container"></div>
-<div class="score-panel" id="scorePanel">
+
+      <div class="score-panel" id="scorePanel">
         <div class="score-panel-title" data-es="Resultados" data-en="Results">Resultados</div>
         <div style="display:flex; align-items:flex-end; gap:var(--space-6); flex-wrap:wrap; margin-bottom:var(--space-4);">
           <div>
@@ -1426,42 +1423,37 @@ a, button, [role='button'], input, select {
             </button>
             <span class="copy-feedback" id="copyFeedback">¡Copiado!</span>
           </div>
-        
-<!-- ── Dual results view ── -->
-<div class="results-dual-container" id="resultsDualContainer">
-  <!-- Detailed view first -->
-  <div class="result-view-block" id="detailViewBlock">
-    <div class="result-view-label" data-es="Vista Detallada" data-en="Detailed View">Detailed View</div>
-    <div class="result-view-text" id="detailViewText"></div>
-    <button type="button" class="result-view-copy-btn" id="copyDetailBtn" onclick="copyDetailedNote()">
-      <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2v1"/></svg>
-      <span data-es="Copiar vista detallada" data-en="Copy Detailed View" id="copyDetailLabel">Copy Detailed View</span>
-      <span class="copy-flash" id="copyDetailFlash"></span>
-    </button>
-  </div>
-  <!-- Simple view second -->
-  <div class="result-view-block" id="simpleViewBlock">
-    <div class="result-view-label" data-es="Vista Simple" data-en="Simple View">Simple View</div>
-    <div class="result-view-text" id="noteSummaryBox"></div>
-    <button type="button" class="result-view-copy-btn" id="copySimpleBtn" onclick="copyNote()">
-      <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2v1"/></svg>
-      <span data-es="Copiar vista simple" data-en="Copy Simple View" id="copySimpleLabel">Copy Simple View</span>
-      <span class="copy-flash" id="copySimpleFlash"></span>
-    </button>
-  </div>
-  <!-- Print / PDF row -->
-  <div class="print-pdf-row">
-    <button type="button" class="btn-print" id="btnPrint" disabled onclick="doPrint()">
-      <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
-      <span data-es="Imprimir" data-en="Print" id="btnPrintLabel">Print</span>
-    </button>
-    <button type="button" class="btn-print" id="btnPDF" disabled onclick="doPrint()">
-      <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="18" x2="12" y2="12"/><line x1="9" y1="15" x2="15" y2="15"/></svg>
-      <span data-es="Guardar PDF" data-en="Save as PDF" id="btnPDFLabel">Save as PDF</span>
-    </button>
-  </div>
-</div>
-
+          <!-- ── Dual Results View ── -->
+          <div class="results-dual-container" id="resultsDualContainer">
+            <div class="result-view-block" id="detailViewBlock">
+              <div class="result-view-label" id="detailLbl">Detailed View</div>
+              <div class="result-view-text" id="detailViewText">(Complete all questions to see detailed view)</div>
+              <button type="button" class="result-view-copy-btn" onclick="copyDetailedNote()">
+                <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2v1"/></svg>
+                <span id="copyDetailLabel">Copy Detailed View</span>
+                <span class="copy-flash" id="copyDetailFlash"></span>
+              </button>
+            </div>
+            <div class="result-view-block" id="simpleViewBlock">
+              <div class="result-view-label" id="simpleLbl">Simple View</div>
+              <div class="note-summary-box visible result-view-text" id="noteSummaryBox"></div>
+              <button type="button" class="result-view-copy-btn" onclick="copyNote()">
+                <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2v1"/></svg>
+                <span id="copySimpleLabel">Copy Simple View</span>
+                <span class="copy-flash" id="copySimpleFlash"></span>
+              </button>
+            </div>
+            <div class="print-pdf-row">
+              <button type="button" class="btn-print" id="btnPrint" disabled onclick="window.print()">
+                <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+                <span id="btnPrintLabel">Print</span>
+              </button>
+              <button type="button" class="btn-print" id="btnPDF" disabled onclick="window.print()">
+                <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="18" x2="12" y2="12"/><line x1="9" y1="15" x2="15" y2="15"/></svg>
+                <span id="btnPDFLabel">Save as PDF</span>
+              </button>
+            </div>
+          </div>
       </div>
     </form>
   </div>
@@ -1560,7 +1552,6 @@ function onAnswerSelected(qNum, idx) {
   _answeredQNums.add(qNum);
   updateScore();
   generateNote();
-  generateDetailedNote();
 
   var allSections = Array.from(document.querySelectorAll('.question-section'));
   var allAnswered = allSections.every(function(s) {
@@ -1656,7 +1647,7 @@ Note: Does not include alcohol`;
   document.getElementById('noteSummaryBox').textContent = isEN ? noteEN : noteES;
 }
 
-_copyNoteLegacy() {
+function copyNote() {
   const box = document.getElementById('noteSummaryBox');
   const text = box.textContent;
   if (!text) return;
@@ -1676,7 +1667,6 @@ function resetForm() {
   _answeredQNums.clear();
   updateScore();
   generateNote();
-  generateDetailedNote();
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
@@ -1715,7 +1705,6 @@ function setLang(lang) {
   if (btnES) btnES.classList.toggle('active', !isEN);
   if (btnEN) btnEN.classList.toggle('active', isEN);
   if (typeof generateNote === 'function') generateNote();
-  generateDetailedNote();
   if (typeof updateScore === 'function') updateScore();
   if (typeof setLangPartial === 'function') setLangPartial(lang);
 }
@@ -1838,151 +1827,120 @@ function submitFeedback(e) {
 </script>
 
 
-
 <script>
-// ── Send + Detailed View + Print/PDF ──────────────────────────
-(function() {
-  // Hide feedback card if ?shared=1
-  var params = new URLSearchParams(location.search);
-  if (params.get('shared') === '1') {
-    var fb = document.querySelector('.feedback-box');
-    if (fb) fb.classList.add('shared-hide');
-  }
-
-  var _origSetLangSDP = window.setLang;
-  window.setLang = function(lang) {
-    if (_origSetLangSDP) _origSetLangSDP(lang);
-    // Re-generate detailed note if visible
-    if (typeof generateDetailedNote === 'function') generateDetailedNote();
-    if (typeof generateNote === 'function') generateNote();
-  };
-
-  // Also observe data-lang attr
-  var _obs2 = new MutationObserver(function(muts) {
-    muts.forEach(function(m) {
-      if (m.attributeName === 'data-lang') {
-        var lang = document.documentElement.getAttribute('data-lang') || 'en';
-        if (typeof generateDetailedNote === 'function') generateDetailedNote();
-      }
+// ── Detailed view + print/PDF + shared hide ──
+(function(){
+  // Hide feedback card on ?shared=1
+  if(new URLSearchParams(location.search).get('shared')==='1'){
+    document.addEventListener('DOMContentLoaded',function(){
+      var fb=document.querySelector('.feedback-box');
+      if(fb)fb.classList.add('shared-hide');
     });
-  });
-  _obs2.observe(document.documentElement, { attributes: true });
+  }
 })();
 
-function copyDetailedNote() {
-  var el = document.getElementById('detailViewText');
-  if (!el) return;
-  navigator.clipboard.writeText(el.textContent).then(function() {
-    var flash = document.getElementById('copyDetailFlash');
-    var lang = document.documentElement.getAttribute('data-lang') || 'en';
-    if (flash) { flash.textContent = lang === 'es' ? '¡Copiado!' : 'Copied!'; flash.classList.add('show'); setTimeout(function(){ flash.classList.remove('show'); }, 2200); }
+function updatePrintButtons(enabled){
+  var p=document.getElementById('btnPrint'),d=document.getElementById('btnPDF');
+  if(p)p.disabled=!enabled;
+  if(d)d.disabled=!enabled;
+}
+
+function copyDetailedNote(){
+  var el=document.getElementById('detailViewText');
+  if(!el)return;
+  navigator.clipboard.writeText(el.textContent).then(function(){
+    var f=document.getElementById('copyDetailFlash');
+    var l=document.documentElement.getAttribute('data-lang')||'en';
+    if(f){f.textContent=l==='es'?'¡Copiado!':'Copied!';f.classList.add('show');setTimeout(function(){f.classList.remove('show');},2200);}
   }).catch(function(){});
 }
 
-function copyNote() {
-  var box = document.getElementById('noteSummaryBox');
-  if (!box) return;
-  navigator.clipboard.writeText(box.textContent).then(function() {
-    // Legacy copyFeedback span support
-    var fb = document.getElementById('copyFeedback');
-    if (fb) { var lang = document.documentElement.getAttribute('data-lang') || 'en'; fb.textContent = lang === 'es' ? '¡Copiado!' : 'Copied!'; fb.classList.add('show'); setTimeout(function(){ fb.classList.remove('show'); }, 2500); }
-    var flash = document.getElementById('copySimpleFlash');
-    if (flash) { var lang2 = document.documentElement.getAttribute('data-lang') || 'en'; flash.textContent = lang2 === 'es' ? '¡Copiado!' : 'Copied!'; flash.classList.add('show'); setTimeout(function(){ flash.classList.remove('show'); }, 2200); }
+var _origCopyNote=window.copyNote;
+window.copyNote=function(){
+  var box=document.getElementById('noteSummaryBox');
+  if(!box)return;
+  navigator.clipboard.writeText(box.textContent).then(function(){
+    var f=document.getElementById('copySimpleFlash');
+    var l=document.documentElement.getAttribute('data-lang')||'en';
+    if(f){f.textContent=l==='es'?'¡Copiado!':'Copied!';f.classList.add('show');setTimeout(function(){f.classList.remove('show');},2200);}
+    var fb=document.getElementById('copyFeedback');
+    if(fb){fb.textContent=l==='es'?'¡Copiado!':'Copied!';fb.classList.add('show');setTimeout(function(){fb.classList.remove('show');},2500);}
   }).catch(function(){});
-}
+};
 
-function doPrint() {
-  window.print();
-}
-
-function updatePrintButtons(enabled) {
-  var bp = document.getElementById('btnPrint');
-  var bd = document.getElementById('btnPDF');
-  if (bp) bp.disabled = !enabled;
-  if (bd) bd.disabled = !enabled;
-}
-
-// ── Detailed narrative generator ─────────────────────────────
-// Called after every answer change — reads QUESTIONS, LABELS, RADIO_VALUES from global scope.
-// Falls back gracefully if those aren't present (Vanderbilt uses different approach).
-function generateDetailedNote() {
-  var el = document.getElementById('detailViewText');
-  if (!el) return;
-
-  // Vanderbilt: skip — it has its own copy-text
-  if (!window.QUESTIONS || !window.LABELS) return;
-
-  var lang = document.documentElement.getAttribute('data-lang') || 'en';
-  var isEN = lang !== 'es';
-
-  // Collect answered values
-  var answers = {};
-  var answered = 0;
-  QUESTIONS.forEach(function(q) {
-    var sel = document.querySelector('input[name="q' + q.n + '"]:checked');
-    if (sel !== null) {
-      answers[q.n] = parseInt(sel.value);
-      answered++;
-    }
+function generateDetailedNote(){
+  var el=document.getElementById('detailViewText');
+  if(!el)return;
+  if(typeof QUESTIONS==='undefined'||typeof LABELS==='undefined')return;
+  var lang=document.documentElement.getAttribute('data-lang')||'en';
+  var isEN=lang!=='es';
+  var answers={},answered=0;
+  QUESTIONS.forEach(function(q){
+    var sel=document.querySelector('input[name="q'+q.n+'"]:checked');
+    if(sel){answers[q.n]=parseInt(sel.value);answered++;}
   });
-
-  var complete = answered === QUESTIONS.length;
-
-  // Get severity + score from existing generateNote output (simple view)
-  var simpleBox = document.getElementById('noteSummaryBox');
-  var simpleText = simpleBox ? simpleBox.textContent : '';
-
-  // Extract score line from simple text or compute inline
-  // We'll build the severity header ourselves by reading the simple note
-  var header = simpleText ? simpleText.split('\n').slice(0,4).join('\n') : '';
-
-  if (!complete) {
-    el.textContent = isEN
-      ? '(Complete all questions to see detailed view)'
-      : '(Completa todas las preguntas para ver la vista detallada)';
+  var complete=answered===QUESTIONS.length;
+  if(!complete){
+    el.textContent=isEN?'(Complete all questions to see detailed view)':'(Completa todas las preguntas para ver la vista detallada)';
     updatePrintButtons(false);
     return;
   }
-
   updatePrintButtons(true);
-
-  // Get the label sets — figure out the scale type
-  var labels = LABELS[lang] || LABELS['en'];
-  var vals = window.RADIO_VALUES || Object.keys(labels).map(Number);
-
-  // Build groups: for each possible value descending, collect question texts
-  // Sort values descending so highest acuity first
-  var sortedVals = vals.slice().sort(function(a,b){ return b-a; });
-
-  // For yes/no (DAST10, CRAFFT), positives = score>0
-  // We'll group by actual selected value, descending
-  var groups = {};
-  sortedVals.forEach(function(v) { groups[v] = []; });
-
-  QUESTIONS.forEach(function(q) {
-    var val = answers[q.n];
-    if (val !== undefined && groups[val] !== undefined) {
-      groups[val].push(isEN ? q.en : q.es);
+  // Pull header from simple view
+  var simpleBox=document.getElementById('noteSummaryBox');
+  var header=simpleBox?simpleBox.textContent.split('\n').slice(0,4).join('\n'):'';
+  var labels=LABELS[lang]||LABELS['en'];
+  var vals=window.RADIO_VALUES?window.RADIO_VALUES.slice():Object.keys(labels).map(Number);
+  vals.sort(function(a,b){return b-a;});
+  var groups={};vals.forEach(function(v){groups[v]=[];});
+  QUESTIONS.forEach(function(q){
+    var v=answers[q.n];
+    if(v!==undefined&&groups[v]!==undefined)groups[v].push(isEN?q.en:q.es);
+  });
+  var lines=[header,''];
+  vals.forEach(function(v){
+    if(groups[v]&&groups[v].length>0){
+      var lbl=labels[v]||String(v);
+      var prefix=v===0
+        ?(isEN?'Not endorsed ("'+lbl+'"): ':'No endosado ("'+lbl+'"): ')
+        :(isEN?'Rated "'+lbl+'": ':'Valorado "'+lbl+'": ');
+      lines.push(prefix+groups[v].join('; ')+'.');
     }
   });
-
-  var lines = [header, ''];
-
-  sortedVals.forEach(function(v) {
-    if (groups[v] && groups[v].length > 0) {
-      // Skip zero/never for binary scales unless it's the only group
-      var labelText = (labels[v] || String(v));
-      var prefix = isEN ? ('Rated "' + labelText + '": ') : ('Valorado "' + labelText + '": ');
-      // For 0-value items, label differently
-      if (v === 0) {
-        prefix = isEN ? ('Not endorsed / "' + labelText + '": ') : ('No endosado / "' + labelText + '": ');
-      }
-      lines.push(prefix + groups[v].join('; ') + '.');
-    }
-  });
-
-  el.textContent = lines.join('\n');
+  el.textContent=lines.join('\n');
 }
+
+// Apply result view labels on lang change
+function _applyResultLang(lang){
+  var isEN=lang!=='es';
+  var m={
+    detailLbl:    ['Detailed View','Vista Detallada'],
+    simpleLbl:    ['Simple View','Vista Simple'],
+    copyDetailLabel:['Copy Detailed View','Copiar vista detallada'],
+    copySimpleLabel:['Copy Simple View','Copiar vista simple'],
+    btnPrintLabel:  ['Print','Imprimir'],
+    btnPDFLabel:    ['Save as PDF','Guardar PDF']
+  };
+  Object.entries(m).forEach(function(e){
+    var el=document.getElementById(e[0]);
+    if(el)el.textContent=isEN?e[1][0]:e[1][1];
+  });
+  if(typeof generateDetailedNote==='function')generateDetailedNote();
+}
+
+// Hook into setLang
+(function(){
+  var _orig=window.setLang;
+  window.setLang=function(lang){
+    if(_orig)_orig(lang);
+    _applyResultLang(lang);
+  };
+  document.addEventListener('DOMContentLoaded',function(){
+    var lang=new URLSearchParams(location.search).get('lang')||
+              document.documentElement.getAttribute('data-lang')||'en';
+    _applyResultLang(lang);
+  });
+})();
 </script>
 
 </body>
