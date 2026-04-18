@@ -1319,6 +1319,47 @@ a, button, [role='button'], input, select {
 .feedback-submit{align-self:flex-end;background:var(--color-primary,#4F98A3);color:#fff;border:none;border-radius:8px;padding:.55rem 1.4rem;font-size:.9rem;font-weight:600;cursor:pointer;transition:opacity .15s;}
 .feedback-submit:hover{opacity:.85;}
 .feedback-success{display:none;margin-top:.75rem;color:var(--color-primary,#4F98A3);font-size:.9rem;font-weight:500;}
+
+/* ── Send Panel ── */
+.send-panel{background:var(--color-surface-2);border:1px solid var(--color-border);border-radius:12px;padding:1.1rem 1.25rem;margin:1.5rem 0 1rem;max-width:640px;}
+.send-panel-title{font-size:.95rem;font-weight:700;color:var(--color-primary);margin-bottom:.75rem;}
+.send-panel-row{display:flex;gap:.6rem;flex-wrap:wrap;align-items:center;margin-bottom:.6rem;}
+.send-input{flex:1;min-width:160px;background:var(--color-surface);border:1px solid var(--color-border);border-radius:8px;padding:.55rem .85rem;color:var(--color-text);font-size:.9rem;font-family:inherit;}
+.send-input::placeholder{color:var(--color-text-muted);}
+.send-generate-btn{background:var(--color-primary);color:#fff;border:none;border-radius:8px;padding:.55rem 1.1rem;font-size:.9rem;font-weight:600;cursor:pointer;white-space:nowrap;transition:opacity .15s;}
+.send-generate-btn:hover{opacity:.85;}
+.send-output-box{background:var(--color-surface);border:1px solid var(--color-border);border-radius:8px;padding:.75rem 1rem;font-size:.88rem;color:var(--color-text);line-height:1.6;margin-top:.6rem;display:none;white-space:pre-wrap;}
+.send-output-box.visible{display:block;}
+.send-copy-btn{margin-top:.5rem;background:transparent;border:1px solid var(--color-border);border-radius:8px;padding:.4rem .9rem;font-size:.85rem;color:var(--color-text-muted);cursor:pointer;transition:all .15s;display:none;}
+.send-copy-btn.visible{display:inline-flex;align-items:center;gap:.4rem;}
+.send-copy-btn:hover{border-color:var(--color-primary);color:var(--color-primary);}
+
+/* ── Results Panels (Detailed + Simple) ── */
+.results-dual-container{margin-top:.75rem;}
+.result-view-block{background:var(--color-surface);border:1px solid var(--color-border);border-radius:10px;padding:1rem 1.1rem;margin-bottom:.75rem;}
+.result-view-label{font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--color-primary);margin-bottom:.6rem;}
+.result-view-text{font-size:.88rem;color:var(--color-text);white-space:pre-wrap;line-height:1.65;font-family:inherit;}
+.result-view-copy-btn{margin-top:.6rem;background:transparent;border:1px solid var(--color-border);border-radius:8px;padding:.38rem .85rem;font-size:.82rem;color:var(--color-text-muted);cursor:pointer;transition:all .15s;display:inline-flex;align-items:center;gap:.4rem;}
+.result-view-copy-btn:hover{border-color:var(--color-primary);color:var(--color-primary);}
+.copy-flash{font-size:.8rem;color:var(--color-primary);margin-left:.5rem;opacity:0;transition:opacity .3s;}
+.copy-flash.show{opacity:1;}
+
+/* ── Print / PDF buttons ── */
+.print-pdf-row{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:.5rem;}
+.btn-print{display:inline-flex;align-items:center;gap:.4rem;background:transparent;border:1px solid var(--color-border);border-radius:8px;padding:.45rem 1rem;font-size:.85rem;font-weight:500;color:var(--color-text-muted);cursor:pointer;transition:all .15s;}
+.btn-print:hover:not(:disabled){border-color:var(--color-primary);color:var(--color-primary);}
+.btn-print:disabled{opacity:.35;cursor:not-allowed;}
+
+/* ── Print stylesheet ── */
+@media print{
+  .topbar,.top-bar,.send-panel,.print-pdf-row,.score-actions,.result-view-copy-btn,.send-panel,.feedback-box,button,.lang-toggle,.reset-btn,.copy-btn{display:none!important;}
+  .score-panel,.result-view-block,.results-dual-container{box-shadow:none!important;border:1px solid #ccc!important;}
+  body{background:#fff!important;color:#000!important;}
+  .result-view-text{color:#000!important;}
+}
+
+/* ── Hide feedback on ?shared=1 ── */
+.shared-hide{display:none!important;}
 </style>
 </head>
 <body>
@@ -1389,7 +1430,29 @@ a, button, [role='button'], input, select {
       <form id="toolform" novalidate>
         <div id="questions-container"></div>
 
-        <div class="score-panel" id="scorePanel">
+        
+<!-- ── Send Panel ── -->
+<div class="send-panel" id="sendPanel">
+  <div class="send-panel-title">
+    <span data-es="Enviar cuestionario" data-en="Send Questionnaire" id="sendPanelTitle">Send Questionnaire</span>
+  </div>
+  <div class="send-panel-row">
+    <input type="text" class="send-input" id="sendContact"
+      data-es-placeholder="Información de contacto (opcional)"
+      data-en-placeholder="Contact info (optional)"
+      placeholder="Contact info (optional)">
+    <button type="button" class="send-generate-btn" id="sendGenerateBtn" onclick="generateSendText()">
+      <span data-es="Generar texto" data-en="Generate Text">Generate Text</span>
+    </button>
+  </div>
+  <div class="send-output-box" id="sendOutputBox"></div>
+  <button type="button" class="send-copy-btn" id="sendCopyBtn" onclick="copySendText()">
+    <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+    <span data-es="Copiar texto" data-en="Copy Text" id="sendCopyLabel">Copy Text</span>
+  </button>
+</div>
+
+<div class="score-panel" id="scorePanel">
           <div class="score-panel-title" data-es="Resultados" data-en="Results">Resultados</div>
 
           <div style="display:flex; align-items:flex-end; gap:var(--space-6); flex-wrap:wrap; margin-bottom:var(--space-4);">
@@ -1407,7 +1470,7 @@ a, button, [role='button'], input, select {
 
           <!-- Actions -->
           <div class="score-actions">
-            <button type="button" class="btn-secondary" id="copyNoteBtn" onclick="copyNote()">
+            <button type="button" class="btn-secondary" id="copyNoteBtn" onclick="_copyNoteLegacy()" style="display:none">
               <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
               <span data-es="Copiar resumen" data-en="Copy Summary">Copiar resumen</span>
             </button>
@@ -1418,7 +1481,42 @@ a, button, [role='button'], input, select {
             <span class="copy-feedback" id="copyFeedback" data-es="¡Copiado!" data-en="Copied!">¡Copiado!</span>
           </div>
 
-          <div class="note-summary-box visible" id="noteSummaryBox"></div>
+          
+<!-- ── Dual results view ── -->
+<div class="results-dual-container" id="resultsDualContainer">
+  <!-- Detailed view first -->
+  <div class="result-view-block" id="detailViewBlock">
+    <div class="result-view-label" data-es="Vista Detallada" data-en="Detailed View">Detailed View</div>
+    <div class="result-view-text" id="detailViewText"></div>
+    <button type="button" class="result-view-copy-btn" id="copyDetailBtn" onclick="copyDetailedNote()">
+      <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2v1"/></svg>
+      <span data-es="Copiar vista detallada" data-en="Copy Detailed View" id="copyDetailLabel">Copy Detailed View</span>
+      <span class="copy-flash" id="copyDetailFlash"></span>
+    </button>
+  </div>
+  <!-- Simple view second -->
+  <div class="result-view-block" id="simpleViewBlock">
+    <div class="result-view-label" data-es="Vista Simple" data-en="Simple View">Simple View</div>
+    <div class="result-view-text" id="noteSummaryBox"></div>
+    <button type="button" class="result-view-copy-btn" id="copySimpleBtn" onclick="copyNote()">
+      <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2v1"/></svg>
+      <span data-es="Copiar vista simple" data-en="Copy Simple View" id="copySimpleLabel">Copy Simple View</span>
+      <span class="copy-flash" id="copySimpleFlash"></span>
+    </button>
+  </div>
+  <!-- Print / PDF row -->
+  <div class="print-pdf-row">
+    <button type="button" class="btn-print" id="btnPrint" disabled onclick="doPrint()">
+      <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+      <span data-es="Imprimir" data-en="Print" id="btnPrintLabel">Print</span>
+    </button>
+    <button type="button" class="btn-print" id="btnPDF" disabled onclick="doPrint()">
+      <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="18" x2="12" y2="12"/><line x1="9" y1="15" x2="15" y2="15"/></svg>
+      <span data-es="Guardar PDF" data-en="Save as PDF" id="btnPDFLabel">Save as PDF</span>
+    </button>
+  </div>
+</div>
+
         </div>
 
       </form>
@@ -1497,6 +1595,7 @@ function renderQuestions() {
   });
   updateScore();
   generateNote();
+  generateDetailedNote();
 }
 
 // ===== SMART AUTO-SCROLL =====
@@ -1517,6 +1616,7 @@ function onAnswerSelected(qNum, idx) {
   _answeredQNums.add(qNum);
   updateScore();
   generateNote();
+  generateDetailedNote();
 
   var allSections = Array.from(document.querySelectorAll('.question-section'));
   var allAnswered = allSections.every(function(s) {
@@ -1617,7 +1717,7 @@ Clinical cutoff: ≥10 (Moderate anxiety or greater)`;
 }
 
 // ===== COPY NOTE =====
-function copyNote() {
+_copyNoteLegacy() {
   const box = document.getElementById('noteSummaryBox');
   const text = box.textContent;
   if (!text) return;
@@ -1639,6 +1739,7 @@ function resetForm() {
   _answeredQNums.clear();
   updateScore();
   generateNote();
+  generateDetailedNote();
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
@@ -1678,6 +1779,7 @@ function setLang(lang) {
   if (btnES) btnES.classList.toggle('active', !isEN);
   if (btnEN) btnEN.classList.toggle('active', isEN);
   if (typeof generateNote === 'function') generateNote();
+  generateDetailedNote();
   if (typeof updateScore === 'function') updateScore();
   if (typeof setLangPartial === 'function') setLangPartial(lang);
 }
@@ -1797,6 +1899,241 @@ function submitFeedback(e) {
   .catch(function() {
     if (btn) btn.disabled = false;
   });
+}
+</script>
+
+
+
+<script>
+// ── Send + Detailed View + Print/PDF ──────────────────────────
+(function() {
+  // Hide feedback card if ?shared=1
+  var params = new URLSearchParams(location.search);
+  if (params.get('shared') === '1') {
+    var fb = document.querySelector('.feedback-box');
+    if (fb) fb.classList.add('shared-hide');
+  }
+
+  // Apply send-panel lang on setLang hook
+  var _origSetLangSDP = window.setLang;
+  window.setLang = function(lang) {
+    if (_origSetLangSDP) _origSetLangSDP(lang);
+    applySendLang(lang);
+    // Re-generate detailed note if visible
+    if (typeof generateDetailedNote === 'function') generateDetailedNote();
+    if (typeof generateNote === 'function') generateNote();
+  };
+
+  // Also observe data-lang attr
+  var _obs2 = new MutationObserver(function(muts) {
+    muts.forEach(function(m) {
+      if (m.attributeName === 'data-lang') {
+        var lang = document.documentElement.getAttribute('data-lang') || 'en';
+        applySendLang(lang);
+        if (typeof generateDetailedNote === 'function') generateDetailedNote();
+      }
+    });
+  });
+  _obs2.observe(document.documentElement, { attributes: true });
+
+  document.addEventListener('DOMContentLoaded', function() {
+    var lang = new URLSearchParams(location.search).get('lang') ||
+               document.documentElement.getAttribute('data-lang') || 'en';
+    applySendLang(lang);
+    // Remove old single copy button id to avoid conflicts
+    var oldBtn = document.getElementById('copyNoteBtn');
+    if (oldBtn) oldBtn.style.display = 'none';
+  });
+})();
+
+function applySendLang(lang) {
+  var isEN = lang !== 'es';
+  var els = [
+    ['sendPanelTitle',  'Send Questionnaire',      'Enviar cuestionario'],
+    ['sendCopyLabel',   'Copy Text',                'Copiar texto'],
+    ['copyDetailLabel', 'Copy Detailed View',       'Copiar vista detallada'],
+    ['copySimpleLabel', 'Copy Simple View',         'Copiar vista simple'],
+    ['btnPrintLabel',   'Print',                    'Imprimir'],
+    ['btnPDFLabel',     'Save as PDF',              'Guardar PDF'],
+  ];
+  els.forEach(function(e) {
+    var el = document.getElementById(e[0]);
+    if (el) el.textContent = isEN ? e[1] : e[2];
+  });
+  var ci = document.getElementById('sendContact');
+  if (ci) ci.placeholder = isEN ? 'Contact info (optional)' : 'Información de contacto (opcional)';
+  var gb = document.getElementById('sendGenerateBtn');
+  if (gb) { var sp = gb.querySelector('span'); if (sp) sp.textContent = isEN ? 'Generate Text' : 'Generar texto'; }
+  // Update view labels
+  var dvl = document.querySelector('#detailViewBlock .result-view-label');
+  if (dvl) dvl.textContent = isEN ? 'Detailed View' : 'Vista Detallada';
+  var svl = document.querySelector('#simpleViewBlock .result-view-label');
+  if (svl) svl.textContent = isEN ? 'Simple View' : 'Vista Simple';
+}
+
+function generateSendText() {
+  var lang = document.documentElement.getAttribute('data-lang') || 'en';
+  var isEN = lang !== 'es';
+  var contact = (document.getElementById('sendContact') || {}).value || '';
+  var pageUrl = location.href.split('?')[0] + '?shared=1';
+  var title = document.title;
+
+  var textEN, textES;
+  if (contact) {
+    textEN = 'I would like you to complete the ' + title + ' questionnaire. Please use the link below, then copy your Detailed View results and send them back to me at ' + contact + '.
+
+' + pageUrl;
+    textES = 'Me gustaría que completaras el cuestionario ' + title + '. Por favor usa el enlace a continuación, luego copia los resultados de la Vista Detallada y envíamelos a ' + contact + '.
+
+' + pageUrl;
+  } else {
+    textEN = 'I would like you to complete the ' + title + ' questionnaire. Please use the link below, then copy your Detailed View results and save them to share with me at your next visit.
+
+' + pageUrl;
+    textES = 'Me gustaría que completaras el cuestionario ' + title + '. Por favor usa el enlace a continuación, luego copia los resultados de la Vista Detallada y guárdalos para compartirlos conmigo en tu próxima visita.
+
+' + pageUrl;
+  }
+
+  var text = isEN ? textEN : textES;
+  var box = document.getElementById('sendOutputBox');
+  var btn = document.getElementById('sendCopyBtn');
+  if (box) { box.textContent = text; box.classList.add('visible'); }
+  if (btn) btn.classList.add('visible');
+}
+
+function copySendText() {
+  var box = document.getElementById('sendOutputBox');
+  if (!box) return;
+  navigator.clipboard.writeText(box.textContent).then(function() {
+    var btn = document.getElementById('sendCopyBtn');
+    var lang = document.documentElement.getAttribute('data-lang') || 'en';
+    var orig = btn ? btn.querySelector('span:last-child') : null;
+    if (btn) {
+      var label = btn.querySelector('#sendCopyLabel');
+      if (label) {
+        label.textContent = lang === 'es' ? '¡Copiado!' : 'Copied!';
+        setTimeout(function() {
+          label.textContent = lang === 'es' ? 'Copiar texto' : 'Copy Text';
+        }, 2200);
+      }
+    }
+  }).catch(function(){});
+}
+
+function copyDetailedNote() {
+  var el = document.getElementById('detailViewText');
+  if (!el) return;
+  navigator.clipboard.writeText(el.textContent).then(function() {
+    var flash = document.getElementById('copyDetailFlash');
+    var lang = document.documentElement.getAttribute('data-lang') || 'en';
+    if (flash) { flash.textContent = lang === 'es' ? '¡Copiado!' : 'Copied!'; flash.classList.add('show'); setTimeout(function(){ flash.classList.remove('show'); }, 2200); }
+  }).catch(function(){});
+}
+
+function copyNote() {
+  var box = document.getElementById('noteSummaryBox');
+  if (!box) return;
+  navigator.clipboard.writeText(box.textContent).then(function() {
+    // Legacy copyFeedback span support
+    var fb = document.getElementById('copyFeedback');
+    if (fb) { var lang = document.documentElement.getAttribute('data-lang') || 'en'; fb.textContent = lang === 'es' ? '¡Copiado!' : 'Copied!'; fb.classList.add('show'); setTimeout(function(){ fb.classList.remove('show'); }, 2500); }
+    var flash = document.getElementById('copySimpleFlash');
+    if (flash) { var lang2 = document.documentElement.getAttribute('data-lang') || 'en'; flash.textContent = lang2 === 'es' ? '¡Copiado!' : 'Copied!'; flash.classList.add('show'); setTimeout(function(){ flash.classList.remove('show'); }, 2200); }
+  }).catch(function(){});
+}
+
+function doPrint() {
+  window.print();
+}
+
+function updatePrintButtons(enabled) {
+  var bp = document.getElementById('btnPrint');
+  var bd = document.getElementById('btnPDF');
+  if (bp) bp.disabled = !enabled;
+  if (bd) bd.disabled = !enabled;
+}
+
+// ── Detailed narrative generator ─────────────────────────────
+// Called after every answer change — reads QUESTIONS, LABELS, RADIO_VALUES from global scope.
+// Falls back gracefully if those aren't present (Vanderbilt uses different approach).
+function generateDetailedNote() {
+  var el = document.getElementById('detailViewText');
+  if (!el) return;
+
+  // Vanderbilt: skip — it has its own copy-text
+  if (!window.QUESTIONS || !window.LABELS) return;
+
+  var lang = document.documentElement.getAttribute('data-lang') || 'en';
+  var isEN = lang !== 'es';
+
+  // Collect answered values
+  var answers = {};
+  var answered = 0;
+  QUESTIONS.forEach(function(q) {
+    var sel = document.querySelector('input[name="q' + q.n + '"]:checked');
+    if (sel !== null) {
+      answers[q.n] = parseInt(sel.value);
+      answered++;
+    }
+  });
+
+  var complete = answered === QUESTIONS.length;
+
+  // Get severity + score from existing generateNote output (simple view)
+  var simpleBox = document.getElementById('noteSummaryBox');
+  var simpleText = simpleBox ? simpleBox.textContent : '';
+
+  // Extract score line from simple text or compute inline
+  // We'll build the severity header ourselves by reading the simple note
+  var header = simpleText ? simpleText.split('\n').slice(0,4).join('\n') : '';
+
+  if (!complete) {
+    el.textContent = isEN
+      ? '(Complete all questions to see detailed view)'
+      : '(Completa todas las preguntas para ver la vista detallada)';
+    updatePrintButtons(false);
+    return;
+  }
+
+  updatePrintButtons(true);
+
+  // Get the label sets — figure out the scale type
+  var labels = LABELS[lang] || LABELS['en'];
+  var vals = window.RADIO_VALUES || Object.keys(labels).map(Number);
+
+  // Build groups: for each possible value descending, collect question texts
+  // Sort values descending so highest acuity first
+  var sortedVals = vals.slice().sort(function(a,b){ return b-a; });
+
+  // For yes/no (DAST10, CRAFFT), positives = score>0
+  // We'll group by actual selected value, descending
+  var groups = {};
+  sortedVals.forEach(function(v) { groups[v] = []; });
+
+  QUESTIONS.forEach(function(q) {
+    var val = answers[q.n];
+    if (val !== undefined && groups[val] !== undefined) {
+      groups[val].push(isEN ? q.en : q.es);
+    }
+  });
+
+  var lines = [header, ''];
+
+  sortedVals.forEach(function(v) {
+    if (groups[v] && groups[v].length > 0) {
+      // Skip zero/never for binary scales unless it's the only group
+      var labelText = (labels[v] || String(v));
+      var prefix = isEN ? ('Rated "' + labelText + '": ') : ('Valorado "' + labelText + '": ');
+      // For 0-value items, label differently
+      if (v === 0) {
+        prefix = isEN ? ('Not endorsed / "' + labelText + '": ') : ('No endosado / "' + labelText + '": ');
+      }
+      lines.push(prefix + groups[v].join('; ') + '.');
+    }
+  });
+
+  el.textContent = lines.join('\n');
 }
 </script>
 
