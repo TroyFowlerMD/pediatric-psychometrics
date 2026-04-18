@@ -1309,6 +1309,17 @@ a, button, [role='button'], input, select {
 [data-lang='es'] .radio-label-es { display: block !important; }
 [data-lang='es'] .question-text-en,
 [data-lang='es'] .radio-label-en { display: none !important; }
+
+/* ── Feedback Card ── */
+.feedback-box{margin:2rem auto 1.5rem;max-width:640px;background:var(--color-surface-2);border:1px solid var(--color-border);border-radius:12px;padding:1.25rem 1.5rem;}
+.feedback-box h2{font-size:1.05rem;font-weight:600;color:var(--color-primary,#4F98A3);margin:0 0 1rem;}
+.feedback-form{display:flex;flex-direction:column;gap:.75rem;}
+.feedback-form input,.feedback-form textarea{background:var(--color-surface);border:1px solid var(--color-border);border-radius:8px;padding:.65rem .85rem;color:var(--color-text);font-size:.92rem;font-family:inherit;resize:vertical;}
+.feedback-form input::placeholder,.feedback-form textarea::placeholder{color:var(--color-text-muted);}
+.feedback-form textarea{min-height:90px;}
+.feedback-submit{align-self:flex-end;background:var(--color-primary,#4F98A3);color:#fff;border:none;border-radius:8px;padding:.55rem 1.4rem;font-size:.9rem;font-weight:600;cursor:pointer;transition:opacity .15s;}
+.feedback-submit:hover{opacity:.85;}
+.feedback-success{display:none;margin-top:.75rem;color:var(--color-primary,#4F98A3);font-size:.9rem;font-weight:500;}
 </style>
   
 </head>
@@ -1706,5 +1717,115 @@ renderQuestions();
   document.querySelectorAll('a[href="index.html"]').forEach(function(a){ a.href='index.html?lang='+lang; });
 })();
 </script>
+
+
+<!-- ── Feedback Card ── -->
+<div class="feedback-box">
+  <h2 id="feedback-heading">Suggestions &amp; Feedback</h2>
+  <form class="feedback-form" onsubmit="submitFeedback(event)">
+    <input type="hidden" name="_subject" id="feedback-subject">
+    <input type="hidden" name="_template" value="table">
+    <input type="hidden" name="_captcha" value="false">
+    <input type="text" name="name" id="feedback-name" required>
+    <textarea name="comment" id="feedback-comment" required></textarea>
+    <button type="submit" class="feedback-submit" id="feedback-btn">Submit</button>
+  </form>
+  <div class="feedback-success" id="feedbackSuccess"></div>
+</div>
+
+
+<script>
+// ── Feedback Card ──
+(function() {
+  var FORMSUBMIT_URL = 'https://formsubmit.co/ajax/troyfowlermd@gmail.com';
+  var strings = {
+    en: {
+      heading: 'Suggestions & Feedback',
+      name: 'Your Name',
+      comment: 'Comment or suggestion…',
+      btn: 'Submit',
+      success: 'Thank you — your feedback has been recorded.'
+    },
+    es: {
+      heading: 'Sugerencias y Comentarios',
+      name: 'Tu nombre',
+      comment: 'Comentario o sugerencia…',
+      btn: 'Enviar',
+      success: 'Gracias — tu comentario ha sido registrado.'
+    }
+  };
+
+  function applyFeedbackLang(lang) {
+    var s = strings[lang] || strings.en;
+    var h = document.getElementById('feedback-heading');
+    var n = document.getElementById('feedback-name');
+    var c = document.getElementById('feedback-comment');
+    var b = document.getElementById('feedback-btn');
+    if (h) h.textContent = s.heading;
+    if (n) n.placeholder = s.name;
+    if (c) c.placeholder = s.comment;
+    if (b) b.textContent = s.btn;
+  }
+
+  // Hook into existing setLang if present, otherwise observe lang attr
+  var _origSetLang = window.setLang;
+  window.setLang = function(lang) {
+    if (_origSetLang) _origSetLang(lang);
+    applyFeedbackLang(lang);
+  };
+
+  // Also observe data-lang attribute changes (for pages that set it directly)
+  var obs = new MutationObserver(function(mutations) {
+    mutations.forEach(function(m) {
+      if (m.attributeName === 'data-lang') {
+        applyFeedbackLang(document.documentElement.getAttribute('data-lang') || 'en');
+      }
+    });
+  });
+  obs.observe(document.documentElement, { attributes: true });
+
+  // Init on load
+  document.addEventListener('DOMContentLoaded', function() {
+    var lang = new URLSearchParams(location.search).get('lang') || 
+               document.documentElement.getAttribute('data-lang') || 'en';
+    applyFeedbackLang(lang);
+    // Set subject
+    var sub = document.getElementById('feedback-subject');
+    if (sub) sub.value = 'Feedback: ' + document.title;
+  });
+})();
+
+function submitFeedback(e) {
+  e.preventDefault();
+  var form = e.target;
+  var data = new FormData(form);
+  data.append('page', document.title);
+  data.append('timestamp', new Date().toISOString());
+  var btn = document.getElementById('feedback-btn');
+  if (btn) btn.disabled = true;
+  fetch('https://formsubmit.co/ajax/troyfowlermd@gmail.com', {
+    method: 'POST',
+    headers: { 'Accept': 'application/json' },
+    body: data
+  })
+  .then(function(r) { return r.json(); })
+  .then(function() {
+    form.style.display = 'none';
+    var suc = document.getElementById('feedbackSuccess');
+    if (suc) {
+      var lang = document.documentElement.getAttribute('data-lang') || 
+                 new URLSearchParams(location.search).get('lang') || 'en';
+      suc.textContent = lang === 'es'
+        ? 'Gracias — tu comentario ha sido registrado.'
+        : 'Thank you — your feedback has been recorded.';
+      suc.style.display = 'block';
+    }
+  })
+  .catch(function() {
+    if (btn) btn.disabled = false;
+  });
+}
+</script>
+
 </body>
 </html>
